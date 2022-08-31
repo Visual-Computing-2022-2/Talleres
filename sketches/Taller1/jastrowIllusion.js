@@ -1,6 +1,6 @@
 let img;
-let xcord = 0;
-let ycord = 0;
+let xcord;
+let ycord;
 
 function preload() {
   img = loadImage('/Talleres/sketches/Taller1/track1.png'); 
@@ -9,6 +9,8 @@ function preload() {
 function setup() {
   createCanvas(500, 500);
   noStroke();
+  xcord = 0;
+  ycord = 0;
 }
 
 function draw() {
@@ -23,8 +25,8 @@ function draw() {
       }
     )
   }else{
-    xcord = (xcord + 1/5);
-  ycord = (ycord + (100/40)/5);
+    xcord = xcord + 1/5;
+    ycord = ycord + (100/40)/5;
   }
 }
 
