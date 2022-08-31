@@ -15,6 +15,10 @@ function start() {
     speedSlider.value(0.05);
 }
 
+function preload() {
+  img = loadImage('/Talleres/sketches/taller1/assets/plus.png'); 
+}
+
 function setup() {
   createCanvas(500, 500);
   noStroke();
@@ -26,7 +30,7 @@ function setup() {
   stopButton.position(0, 35);
   stopButton.size(100, 30);
   stopButton.mousePressed(stop);
-  speedSlider = createSlider(0, 0.1, 0.05, 0.01);
+  speedSlider = createSlider(0, 0.5, 0.1, 0.01);
   speedSlider.position(0, 85);
   speedSlider.size(100, 30);
   rotSlider = createSlider(-0.1, 0.1, 0, 0.01);
@@ -44,12 +48,14 @@ function draw() {
   translate(width / 2, height / 2);
   rotate(angulo);
   fill(0,0,255);
-  rect(0, 0, 180, 180);
+  rect(0, 0, 130, 130);
   rotate(rot);
   fill(255);
-  rect(0, 0, 150, 150);
+  rect(0, 0, 110, 110);
   fill(200,200,200);
   rotate(-angulo-rot);
   text("Speed", -225, -170);
   text("Compensate", -240, -125);
+  rotate(PI/4);
+  image(img, -3, -3, 6, 6);
 }
