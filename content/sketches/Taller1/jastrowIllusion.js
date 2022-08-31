@@ -3,7 +3,7 @@ let xcord;
 let ycord;
 
 function preload() {
-  img = loadImage('/Talleres/sketches/Taller1/track1.png'); 
+  img = loadImage('/Talleres/sketches/taller1/track1.png'); 
 }
 
 function setup() {
