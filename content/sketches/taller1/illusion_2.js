@@ -4,7 +4,7 @@ let yellow_rect;
 let sum = -1
 
 function setup() {
-  createCanvas(898, 247);
+  createCanvas(900, 300);
   bg = loadImage('/Talleres/sketches/taller1/assets/pacman.png');
 }
 
