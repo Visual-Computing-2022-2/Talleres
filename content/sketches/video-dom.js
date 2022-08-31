@@ -3,7 +3,7 @@ function setup() {
   noCanvas();
 
   vid = createVideo(
-    ['/showcase/sketches/fingers.mov', '/showcase/sketches/fingers.webm'],
+    ['/Talleres/sketches/fingers.mov', '/Talleres/sketches/fingers.webm'],
     vidLoad
   );
 
