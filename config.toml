@@ -1,4 +1,4 @@
-baseURL = "https://github.com/Visual-Computing-2022-2/Talleres"
+baseURL = "https://visual-computing-2022-2.github.io/Talleres/"
 languageCode = "en-us"
 title = "Showcase Template"
 theme = 'book'
