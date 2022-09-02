@@ -4,4 +4,4 @@ bookCollapseSection: true
 
 ## Image Processing
 
-{{<section>}}
+<!-- {{<section>}} -->

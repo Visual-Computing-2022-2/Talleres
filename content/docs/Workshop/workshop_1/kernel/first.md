@@ -1,3 +1,28 @@
+
+# Prueba 1
+
+{{< p5-iframe sketch="/Talleres/sketches/taller1/test.js" width="525" height="525" >}}
+
+
+# Image histogram
+## Problem Statement
+
+Implement [Image histogram](https://en.wikipedia.org/wiki/Image_histogram) visualization.
+## Background
+
+The histogram of a digital image depicts how the intensities of its pixels are distributed. It is the discrete function h such that
+
+{{< katex display>}} h(x) = n_i {{< /katex >}}
+
+where{{< katex>}}n_i {{< /katex >}} is the number of pixels with intensity {{< katex>}}i {{< /katex >}} .
+
+Histograms are used to quickly analyze the composition of an image, it can be used in RGB composition, gray scale, brightness or the system that best suits our needs.
+
+The pixel values are processed individually, an aggregate is made for each value and the searched histogram is plotted
+
+## Code 
+{{< details title="Image Histogram Code " open=false >}}
+{{< highlight js >}}
 var stateR;
 var stateG;
 var stateB;
@@ -156,3 +181,12 @@ function drawArrow(base, vec, axis) {
     
   pop();
 }
+{{< /highlight >}}
+{{< /details >}}
+## Results
+{{< p5-iframe sketch="/Talleres/sketches/taller1/histogram.js" width="780" height="1000" >}}
+As we can see, the histogram of an image is made from its RGB color scalar, for this we analyze each pixel and see how much it contains of each value, which is a value between 0 and 255, then we make the graph by mapping the respective values that allow highlighting the composition of the image.
+
+On the x axis we have the represents the variations of the tone, and on the y axis the quantities that appear in the pixels of the image
+## Conclusions & Future Work
+Knowing how to create and read an image histogram is a very powerful tool that allows people who work with graphics and everything related to visual computing to quickly analyze an image, it is recommended to have a clear base with what type of color composition according to our objective, so that our graphs agree with the applications of the project

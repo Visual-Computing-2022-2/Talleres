@@ -2,9 +2,9 @@
 headless: true
 ---
 
-- **Talleres**
+- **Workshop**
 <!-- - [p5]({{< relref "/docs/shortcodes/p5" >}}) -->
-- [Taller_1]({{< relref "/docs/Talleres/taller_1" >}})
+- [Workshop_1]({{< relref "/docs/Workshop/workshop_1" >}})
 <!-- - [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
 - [Columns]({{< relref "/docs/shortcodes/columns" >}})
 - [Expand]({{< relref "/docs/shortcodes/expand" >}})
