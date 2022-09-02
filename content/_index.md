@@ -2,8 +2,20 @@
 title: Introduction
 type: docs
 ---
+# About Us
 
-# Showcase Template
+## Daniel Esteban Perez
+
+I am a fourth year systems engineering student at the National University of Colombia, I like to study data structures and algorithms.
+
+I like to take advantage of my time to travel, eat, look at the sky and study.
+
+You could see some of my projects on my [github](https://github.com/danperezma).
+
+
+
+
+<!-- # Showcase Template
 
 Welcome to the [gohugo](https://gohugo.io/) template to create rich content [academic reports](https://www.wordy.com/writers-workshop/writing-an-academic-report/) having [p5.js](https://p5js.org/) sketches.
 
@@ -36,4 +48,4 @@ Don't forget to select the `gh-pages` branch as the one to serve your site from 
 
 {{< hint info >}}
 The **showcase** template uses the [hugo-book](https://github.com/alex-shpak/hugo-book) theme by default. Check the [hugo themes site](https://themes.gohugo.io/) if you wish to add other ones.
-{{< /hint >}}
+{{< /hint >}} -->

@@ -2,14 +2,14 @@
 headless: true
 ---
 
-- **Shortcodes**
-- [p5]({{< relref "/docs/shortcodes/p5" >}})
-- [Taller1]({{< relref "/taller1" >}})
-- [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
+- **Talleres**
+<!-- - [p5]({{< relref "/docs/shortcodes/p5" >}}) -->
+- [Taller_1]({{< relref "/docs/Talleres/taller_1" >}})
+<!-- - [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
 - [Columns]({{< relref "/docs/shortcodes/columns" >}})
 - [Expand]({{< relref "/docs/shortcodes/expand" >}})
 - [Hints]({{< relref "/docs/shortcodes/hints" >}})
 - [Katex]({{< relref "/docs/shortcodes/katex" >}})
 - [Mermaid]({{< relref "/docs/shortcodes/mermaid" >}})
-- [Tabs]({{< relref "/docs/shortcodes/tabs" >}})
+- [Tabs]({{< relref "/docs/shortcodes/tabs" >}}) -->
 <br />

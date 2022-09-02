@@ -1,6 +1,6 @@
 baseURL = "https://visual-computing-2022-2.github.io/Talleres/"
 languageCode = "en-us"
-title = "Showcase Template"
+title = "Visual Computing"
 theme = 'book'
 
 # Book configuration
