@@ -1,8 +1,24 @@
 
 # Masking
 
-# Kernel histogram
+# Image Kernels
 ## Problem Statement
+
+Implement an image processing web app supporting different [image kernels](https://en.wikipedia.org/wiki/Kernel_%28image_processing%29).
+
+## Background
+
+The use of Kernels also known as convolution matrices or masks is invaluable to image processing. Techniques such as blurring, edge detection, and sharpening all rely on kernels - small matrices of numbers to be applied across an image in order to process the image as a whole.
+
+They're also used in machine learning for 'feature extraction', a technique for determining the most important portions of an image. In this context the process is referred to more generally as "convolution" (see: [convolutional neural networks](https://en.wikipedia.org/wiki/Convolutional_neural_network).)
+
+## Results
+
+- Resumen del trabajo y como funciona
+
+## Conclusions & Future Work
+
+- Conclusiones
 
 # Image histogram
 ## Problem Statement
