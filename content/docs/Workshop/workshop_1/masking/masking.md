@@ -1,8 +1,8 @@
 
-# Prueba 1
+# Masking
 
-{{< p5-iframe sketch="/Talleres/sketches/taller1/test.js" width="525" height="525" >}}
-
+# Kernel histogram
+## Problem Statement
 
 # Image histogram
 ## Problem Statement
