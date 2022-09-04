@@ -5,10 +5,10 @@ let stopButton;
 let startButton;
 let speedSlider;
 let rotSlider;
+let lightBackground;
 
 function stop() {
     speedSlider.value(0);
-    angulo = 0;
 }
 
 function start() {
@@ -36,12 +36,20 @@ function setup() {
   rotSlider = createSlider(-0.1, 0.1, 0, 0.01);
   rotSlider.position(0, 130);
   rotSlider.size(100, 30);
+  lightBackground = createCheckbox('Light Background', false);
+  lightBackground.position(0, 180);
+  lightBackground.style('color', '#fff');
+  lightBackground.size(150, 30);
   angulo = 0;
   rectMode(CENTER);
 }
 
 function draw() {
   background(0);
+  if (lightBackground.checked()) {
+    fill("yellow");
+    circle(250, 250, 300);
+  } 
   speed = speedSlider.value();
   rot = rotSlider.value();
   angulo = angulo + speed % TWO_PI;
