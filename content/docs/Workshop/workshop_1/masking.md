@@ -200,6 +200,12 @@ function drawArrow(base, vec, axis) {
 {{< /highlight >}}
 {{< /details >}}
 ## Results
+#### Shortcuts
+| Key | Action                                |
+|-----|---------------------------------------|
+| t   | toggle kernel                         |
+| s   | Lightness visualization (change mode) |
+
 {{< p5-iframe sketch="/Talleres/sketches/taller1/histogram.js" width="780" height="1000" >}}
 As we can see, the histogram of an image is made from its RGB color scalar, for this we analyze each pixel and see how much it contains of each value, which is a value between 0 and 255, then we make the graph by mapping the respective values that allow highlighting the composition of the image.
 
