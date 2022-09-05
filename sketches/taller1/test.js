@@ -3,9 +3,9 @@ let img;
 let filtered;
 let w, h;
 let filter = [
-  [-2, -1, 0],
-  [-1, 1, 1],
-  [0, 1, 2],
+  [0, -1, 0],
+  [-1, -5, -1],
+  [0, -1, 0],
 ];
 
 function preload() {
