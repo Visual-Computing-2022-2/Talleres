@@ -322,8 +322,8 @@ For this, we used a sample image, where we can reduce or increase the image brig
 
 ## code
 
-{{< details code >}}
-{{< highlight javascript >}}
+{{< details title="Image brightness app's code" open="false" >}}
+{{< highlight js >}}
 
 let img;
 
@@ -504,6 +504,7 @@ function draw() {
 
 {{< /highlight >}}
 {{< /details >}}
+
 
 I am trying to change the brightness of an image using the HSB and HSL color modes. I am using the formula from here: <https://www.rapidtables.com/convert/color/rgb-to-hsl.html>
 
