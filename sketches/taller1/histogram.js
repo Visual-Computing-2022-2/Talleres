@@ -241,4 +241,5 @@ function keyPressed() {
     else
       calculateHistogram(img);
   }
+
 }
