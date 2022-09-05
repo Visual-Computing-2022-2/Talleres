@@ -298,3 +298,6 @@ As we can see, the histogram of an image is made from its RGB color scalar, for 
 On the x axis we have the represents the variations of the tone, and on the y axis the quantities that appear in the pixels of the image
 ## Conclusions & Future Work
 Knowing how to create and read an image histogram is a very powerful tool that allows people who work with graphics and everything related to visual computing to quickly analyze an image, it is recommended to have a clear base with what type of color composition according to our objective, so that our graphs agree with the applications of the project. It's also very useful for photographers which use this histograms to know if a photo they took is well exposed or not, by checking if the vast amount of color is either in the left zone of the histogram (meaning the image is underexposed ) or to the right zone (meaning it's overexposed)
+ 
+ # Ligthness
+ 
