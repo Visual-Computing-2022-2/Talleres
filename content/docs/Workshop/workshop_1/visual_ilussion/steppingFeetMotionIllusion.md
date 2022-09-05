@@ -1,7 +1,7 @@
 ## “Stepping feet” Motion Illusion
 
 ## Code
-{{< details title="Frisén’s Lazy Shadow Code" open=false >}}
+{{< details title="Stepping feet Motion Illusion Code" open=false >}}
 {{< highlight js >}}
 {{% include "/sketches/taller1/illusion_1.js" %}}
 {{< /highlight >}}
@@ -11,7 +11,7 @@
 {{< p5-iframe sketch="/Talleres/sketches/taller1/illusion_1.js" width="625" height="425" >}}
 
 ## Background
-The Stepping feet” Motion Illusion is a visual illusion. This illusion makes it seem that objects move fast or slow depending on background but what happens is the objects move a constant velocity. The first described of the illusion is by Stuart Anstis.
+The "Stepping feet” Motion Illusion is a visual illusion. This illusion makes it seem that objects move fast or slow depending on background but what happens is the objects move a constant velocity. The first described of the illusion is by Stuart Anstis.
 
 For the illusion to work, the luminance of the objects have to be different, for example the red and blue. Further the background
 also have to be different luminance, the best example of background is black and white. Because of the contrast of the objects with the background it is perceived that objects move fast or slow.
