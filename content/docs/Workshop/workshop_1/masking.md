@@ -332,7 +332,7 @@ For this, we used a sample image, where we can reduce or increase the image brig
 | Left Arrow | Decrease Brightness (more) |
 | Right Arrow | Increase Brightness (more) |
 
-{{< p5-iframe sketch="/Talleres/sketches/taller1/lightness.js" width="475" height="515" >}}
+{{< p5-iframe sketch="/Talleres/sketches/taller1/lightness.js" width="500" height="515" >}}
 
 ## Code
 
