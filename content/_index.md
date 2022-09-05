@@ -25,3 +25,7 @@ If you want to see some of my work you can visit my [github](https://github.com/
 ## Cesar Esteban Diaz Medina *(Cesardiaz18)*
 I am a System Engineering Student of Universidad Nacional de Colombia in this moment I am in eighth semester of my career. I have got interested in technical aspects such as cryptography, algoritmhs and data structures. I like video games and table tennis.
 If you want to see some of my work you can visit my [github repository](https://github.com/Cesardiaz18).
+
+### Daniel Santiago Silva Capera *(dasilvaca)*
+
+I am a 20 years old systems engineering student at the National University of Colombia, working nowadays as infrastructure engineer at Huawei. Itś my eighth smester of my undergraduate degree. I have a great ability to solve problems, as well as to design and implement software for different applications. I am passionate about technology and also a dedicated person, always looking for ways to solve and complete all the challenges that are presented to me. Iḿ specially interested on Linux distros, networking, security and software development. In my free time I like to play video games, watch movies and series, and walking around in the outside. To know more about me and the projects I've helped to develop, you can visit my [github repository](https://github.com/dasilvaca).
