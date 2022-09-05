@@ -28,6 +28,7 @@ The first illusion is an image of a pacman, it makes it look like he is eating t
 
 The second illusion is a kinegram created by us, this consists of a circle in which the colors are exchanged, in total consists of only 3 frames and the grid moves in the same way as the first illusion, the following shows the three frames created. 
 
+{{<img src="/Talleres/sketches/taller1/assets/fotogramas.png">}}
 
 ## Conclusions
 It is very interesting to see how with just a grid you can create images with movement. It is important to keep in mind that depending on the number of frames we have and the width we have given to our frame so will make our grid. The more frames we have, the wider each black part of the grid will be. The wider the frames the wider the white part of the grid will be. Another thing to keep in mind is that the width of the frames must be the same. 
