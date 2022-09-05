@@ -3,7 +3,7 @@ let w, h;
 let sum = -1
 let xPosition; 
 function preload() {
-  img = loadImage("assets/circle.png")
+  img = loadImage("/Talleres/sketches/taller1/assets/circle.png")
   w = img.width;
   h = img.height;
   angleMode(DEGREES);
