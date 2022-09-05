@@ -1,13 +1,13 @@
 ## Kinegram (“Scanimation”)
 
 ## Code
-{{< details title="Kinegram (Scanimation) Code " open=false >}}
+{{< details title="Kinegram (Scanimation) Pacman Code " open=false >}}
 {{< highlight js >}}
 {{% include "/sketches/taller1/illusion_2.js" %}}
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Kinegram (Scanimation) Code " open=false >}}
+{{< details title="Kinegram (Scanimation) Circle Code " open=false >}}
 {{< highlight js >}}
 {{% include "/sketches/taller1/illusion_3.js" %}}
 {{< /highlight >}}
@@ -16,7 +16,7 @@
 
 ## Visualization
 {{< p5-iframe sketch="/Talleres/sketches/taller1/illusion_2.js" width="925" height="325" >}}
-{{< p5-iframe sketch="/Talleres/sketches/taller1/illusion_3.js" width="400" height="400" >}}
+{{< p5-iframe sketch="/Talleres/sketches/taller1/illusion_3.js" width="500" height="500" >}}
 
 ## Background
 The Kinegram (“Scanimation”) is a visual illusion that was created in the late 1890s. This illusion consists of placing an image and then moving a black grid with narrow slits from side to side, making it appear as if the image is moving. 
