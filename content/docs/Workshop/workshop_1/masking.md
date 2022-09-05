@@ -502,6 +502,9 @@ function draw() {
 
 }
 
+{{< /highlight >}}
+{{< /details >}}
+
 I am trying to change the brightness of an image using the HSB and HSL color modes. I am using the formula from here: <https://www.rapidtables.com/convert/color/rgb-to-hsl.html>
 
 ## Demo
