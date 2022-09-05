@@ -4,10 +4,9 @@
 
 #### Shortcuts
 
-| Key | Action                                |
-| --- | ------------------------------------- |
-| t   | toggle kernel                         |
-| s   | Lightness visualization (change mode) |
+| Key | Action        |
+| --- | ------------- |
+| t   | toggle kernel |
 
 {{< p5-iframe sketch="/Talleres/sketches/taller1/histogram.js" width="780" height="1000" >}}
 
@@ -320,12 +319,28 @@ Thereś also other ways to modify the brightness of an image, by modifying some 
 
 For this, we used a sample image, where we can reduce or increase the image brightness, and depending on whic color mode the image is, we can do a biyection to RGB and get the new image, modifying the parameters we need.
 
+| Down Arrow | Decrease Brightness                         |
+
+## Demo
+
+### Shortcuts
+
+| Key      | Action               |
+| -------- | -------------------- |
+| Up Arrow | Increase Brightness |
+| Down Arrow | Decrease Brightness |
+| Left Arrow | Decrease Brightness (more) |
+| Right Arrow | Increase Brightness (more) |
+
+{{< p5-iframe sketch="/Talleres/sketches/taller1/lightness.js" width="700" height="700" >}}
+
 ## code
 
 {{< details title="Image brightness app's code" open="false" >}}
 {{< highlight js >}}
 
 let img;
+let brightness_reduction = 0;
 
 function calculate_hue(r_prime, g_prime, b_prime) {
   // Geometric method
@@ -433,12 +448,43 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  // background(255);
+  createCanvas(600, 520);
+  background(255);
+}
+
+function keyPressed() {
+  if (keyCode === 39) { // 
+    brightness_reduction -= 5;
+
+  }
+  else if (keyCode === 37) { // 
+    brightness_reduction += 5;
+
+  }
+  else if (keyCode === 38) { // 
+    brightness_reduction -= 1;
+  }
+  else if (keyCode === 40) { //
+    brightness_reduction += 1;
+  }
+
+  if (brightness_reduction > 100) {
+    brightness_reduction = 100;
+  }
+  else if (brightness_reduction &lt; -100) {
+    brightness_reduction = -100;
+  }
+
+}
+
+function draw() {
   // put drawing code here  
-  brightness_reduction = -15; // 0 to 100
 
   // Change the image brightness in RGB mode
+
+  colorMode(RGB);
+  background(255);
+  text("Brightness reduction: " + brightness_reduction, 10, 510);
 
   image(img, 0, 20);
   text("Original Image", img.width / 3, 10);
@@ -450,11 +496,13 @@ function setup() {
   for (let i = 0; i &lt; img.width; i++) {
     for (let j = 0; j &lt; img.height; j++) {
       let new_color = get_pixel_color(i, j, img.width);
-      for (let k = 0; k &lt; 3; k++) {
-        new_color[k] = new_color[k] - rgb_brightness_reduction;
-      }
+      new_color[0] = new_color[0] - rgb_brightness_reduction;
+      new_color[1] = new_color[1] - rgb_brightness_reduction;
+      new_color[2] = new_color[2] - rgb_brightness_reduction;
+
       changed_img.set(i, j, color(new_color));
     }
+
   }
   changed_img.updatePixels();
   image(changed_img, 250, 20);
@@ -498,16 +546,17 @@ function setup() {
 
 }
 
-function draw() {
-
 }
 
 {{< /highlight >}}
 {{< /details >}}
 
-
 I am trying to change the brightness of an image using the HSB and HSL color modes. I am using the formula from here: <https://www.rapidtables.com/convert/color/rgb-to-hsl.html>
 
-## Demo
+## Expected Behavior
 
-{{< p5-iframe sketch="/Talleres/sketches/taller1/lightness.js" width="780" height="1000" >}}
+The brightness of the image should be reduced by x% in all the three modes.
+
+## Conclusions and Future Work
+
+The brightness of the image can be reduced by x% in all the three modes. The HSB mode is the most accurate in reducing the brightness of the image. The HSL mode is the least accurate in reducing the brightness of the image. The RGB mode is in between the two.
