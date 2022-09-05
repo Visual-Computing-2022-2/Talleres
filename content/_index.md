@@ -21,3 +21,7 @@ You can take a look at [My github repository](https://github.com/nivalderramas)
 ## Jaider Andrés Pinto Pinto *(Jaider0111)*
 I am a systems and computer engineering student at the National University of Colombia and I am in my eighth semester of my undergraduate degree. I have a great ability to solve problems, as well as to design and implement software for different applications.  I am passionate about technology and also a dedicated person, always looking for ways to solve and complete all the challenges that are presented to me. 
 If you want to see some of my work you can visit my [github](https://github.com/Jaider0111).
+
+## Cesar Esteban Diaz Medina *(Cesardiaz18)*
+I am a System Engineering Student of Universidad Nacional de Colombia in this moment I am in eighth semester of my career. I have got interested in technical aspects such as cryptography, algoritmhs and data structures. I like video games and table tennis.
+If you want to see some of my work you can visit my [github repository](https://github.com/Cesardiaz18).
