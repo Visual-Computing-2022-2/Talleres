@@ -72,16 +72,12 @@ let current_order = [...tokens];
 let h_token = 17;
 let i_token = -1;
 let current_token;
-let high_score = 0
-let actual_score = 0
 
 function setup() {
 
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
   frameRate(10);
-  textFont('Silkscreen-Regular.ttf');
-  textSize(32);
   // normalMaterial();
   for (let i = 0; i < 18 + 1 + 4; i++)
     gameMatrix.push([...Array(18).fill(0)]);
@@ -101,17 +97,53 @@ function setup() {
     10: color("#FF0034")
   }
   next_token();
-  button = createButton('II');
-  button.position(10, 10);
+  button = createButton('PAUSE');
+  button.position(0, 0);
   button.style("height", "100px");
   button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
+  button.mousePressed(pause_function)
 }
 
-let scores_fonts;
-function preload() {
-  scores_fonts = loadFont('Silkscreen-Regular.ttf');
+function draw() {
+  // create a classic plane -> h positive to go up ad
+  translate(0, -1, 0);
+  checkKeys();
+
+  camera(camX, camY, camZ, centerX, centerY, centerZ, 0, -1, 0);
+
+  background("#a4eaf5");
+  // background(150);
+  strokeWeight(1);
+  //fill(0, 0, 0, 90);
+  //cylinder(tetrisRadius + 10, 200)
+  //orbitControl();
+  // strokeWeight(20)
+  // strokeWeight(1)
+
+  for (let h = 0; h < gameMatrix.length; h += 1) {
+    for (let i = 0; i < gameMatrix[h].length; i += 1) {
+      display(h, i, gameMatrix[h][i]);
+    }
+  }
+
+  for (let i = 0; i < current_token.length; i++) {
+    for (let j = 0; j < current_token.length; j++) {
+      // print(h_token)
+      display(mod(h_token - i, 24), mod(i_token + j, 18), current_token[i][j]);
+    }
+  }
 }
 
+function pause_function() {
+  if (isLooping()) {
+    noLoop();
+    clearInterval(interval)
+  }
+  else {
+    loop()
+    interval = setInterval('move_down()', 1000)
+  }
+}
 
 function checkKeys() {
 
@@ -197,7 +229,6 @@ function lose() {
       display(18, i, 10);
     }
   }
-
   noLoop()
 }
 
@@ -221,55 +252,6 @@ function check_lines() {
     gameMatrix[HEIGHT_GAME_MATRIX - 1] = [...Array(18).fill(0)]
   }
   gameMatrix[gameMatrix.length - 1] = [...Array(18).fill(0)]
-}
-
-function pause_function() {
-  if (isLooping()) {
-    noLoop();
-    clearInterval(interval)
-  }
-  else loop()
-}
-
-function draw() {
-  clear()
-  
-  // create a classic plane -> h positive to go up ad
-  button = createButton('II');
-  button.position(10, 10);
-  button.mousePressed(pause_function);
-  
-
-  let score_place_holder = text("SCORE: ", 100, 100)
-  fill(0, 102, 153);
-
-
-  // create a classic plane -> h positive to go up ad
-  translate(0, -1, 0);
-  checkKeys();
-
-  camera(camX, camY, camZ, centerX, centerY, centerZ, 0, -1, 0);
-
-  background(240);
-  strokeWeight(1);
-  //fill(0, 0, 0, 90);
-  //cylinder(tetrisRadius + 10, 200)
-  //orbitControl();
-  // strokeWeight(20)
-  // strokeWeight(1)
-
-  for (let h = 0; h < gameMatrix.length; h += 1) {
-    for (let i = 0; i < gameMatrix[h].length; i += 1) {
-      display(h, i, gameMatrix[h][i]);
-    }
-  }
-
-  for (let i = 0; i < current_token.length; i++) {
-    for (let j = 0; j < current_token.length; j++) {
-      // print(h_token)
-      display(mod(h_token - i, 24), mod(i_token + j, 18), current_token[i][j]);
-    }
-  }
 }
 
 function try_move(direction) {
@@ -304,13 +286,7 @@ function try_move(direction) {
       }
     }
   }
-  // score_text = text("SCORE", 10,10)
-  // score_text.position(100,100)
-  // loop()
-  // text('High Score: ', 100, 100, 100);
   return sum == 0;
-
-
 }
 
 function display(h, i, color) {
@@ -344,3 +320,6 @@ function keyPressed() {
     rotate_token(false);
   }
 }
+
+// Aviso legal: El contenido de este mensaje y los archivos adjuntos son confidenciales y de uso exclusivo de la Universidad Nacional de Colombia. Se encuentran dirigidos sólo para el uso del destinatario al cual van enviados. La reproducción, lectura y/o copia se encuentran prohibidas a cualquier persona diferente a este y puede ser ilegal. Si usted lo ha recibido por error, infórmenos y elimínelo de su correo. Los Datos Personales serán tratados conforme a la Ley 1581 de 2012 y a nuestra Política de Datos Personales que podrá consultar en la página web www.unal.edu.co. Las opiniones, informaciones, conclusiones y cualquier otro tipo de dato contenido en este correo electrónico, no relacionados con la actividad de la Universidad Nacional de Colombia, se entenderá como personales y de ninguna manera son avaladas por la Universidad.
+
