@@ -129,6 +129,9 @@ function restart() {
     gameMatrix.push([...Array(18).fill(0)]);
   gameMatrix[0] = [...Array(18).fill(9)];
   gameMatrix[18] = [...Array(18).fill(1)];
+  if (actual_score > high_score){
+    high_score = actual_score;
+  }
   actual_score = 0;
   next_token();
   loop();
