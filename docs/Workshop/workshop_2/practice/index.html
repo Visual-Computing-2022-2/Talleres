@@ -1,6 +1,6 @@
 <!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Practice Rendering # Problem statement # Implement in software any of the above visualizations: primitive rasterization, color shading, z-depth, texture-mapping (as illustrated above) and/or anti-aliasing (requires a bit of research).
 Primitive Rasterization # Rasterization consists of taking an image in vector graphics format and converting it into a raster image, this means a series of pixels, points or lines, which when displayed together create the image that was represented through vector graphics."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/workshop_2/practice/"><title>Practice | Visual Computing</title><link rel=manifest href=/Talleres/manifest.json><link rel=icon href=/Talleres/favicon.png type=image/x-icon><link rel=stylesheet href=/Talleres/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/Talleres/flexsearch.min.js></script>
-<script defer src=/Talleres/en.search.min.3afcf2d08b569d3c696d103f9a9504751f68efbf3964a733cd1a70aa3b1d9c21.js integrity="sha256-Ovzy0ItWnTxpbRA/mpUEdR9o7785ZKczzRpwqjsdnCE=" crossorigin=anonymous></script>
+<script defer src=/Talleres/en.search.min.4de1f0df06b36d26936d3d8ea1dba18ca7d9e644c3239544483f44e54e778116.js integrity="sha256-TeHw3wazbSaTbT2OoduhjKfZ5kTDI5VESD9E5U53gRY=" crossorigin=anonymous></script>
 <link rel=alternate type=application/rss+xml href=https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/workshop_2/practice/index.xml title="Visual Computing"></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/Talleres/><span>Visual Computing</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li class=book-section-flat><span>Workshop</span><ul><li><input type=checkbox id=section-8d2b6a08245086db5d9347a14c60b971 class=toggle>
 <label for=section-8d2b6a08245086db5d9347a14c60b971 class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_1/>Workshop 1</a></label><ul><li><a href=/Talleres/docs/Workshop/workshop_1/masking/>Masking</a></li><li><input type=checkbox id=section-2aa212ced681e7ddb472ce2ea2174f76 class=toggle>
@@ -8,7 +8,7 @@ Primitive Rasterization # Rasterization consists of taking an image in vector gr
 <label for=section-6f90cee8795c0cd7b85a94bc2603fc3f class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_2/>Workshop 2</a></label><ul><li><input type=checkbox id=section-673b9b4bfd505a1d2632f367f1a8e21b class=toggle checked>
 <label for=section-673b9b4bfd505a1d2632f367f1a8e21b class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_2/practice/ class=active>Practice</a></label><ul></ul></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/Talleres/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>Practice</strong>
-<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#practice-rendering>Practice Rendering</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#primitive-rasterization>Primitive Rasterization</a></li><li><a href=#buffer-z>Buffer Z</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=practice-rendering>Practice Rendering
+<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#practice-rendering>Practice Rendering</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#primitive-rasterization>Primitive Rasterization</a></li><li><a href=#z-buffer>Z-Buffer</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=practice-rendering>Practice Rendering
 <a class=anchor href=#practice-rendering>#</a></h1><h2 id=problem-statement>Problem statement
 <a class=anchor href=#problem-statement>#</a></h2><p>Implement in software any of the above visualizations: primitive rasterization, color shading, z-depth, texture-mapping (as illustrated above) and/or anti-aliasing (requires a bit of research).</p><h2 id=primitive-rasterization>Primitive Rasterization
 <a class=anchor href=#primitive-rasterization>#</a></h2><p>Rasterization consists of taking an image in vector graphics format and converting it into a raster image, this means a series of pixels, points or lines, which when displayed together create the image that was represented through vector graphics.</p><p>For this case we are going to make a rasterization of a triangle, then the first thing we must do is to know which pixels are contained within the triangle, for this case we use the edge function that is defined as follows:</p><figure><img src=/Talleres/sketches/taller2/assets/formula.png></figure><p>When the equation gives us less than zero, it means that the point is on the left side of the line, when it gives us greater it means that it is on the right side of the line and when it is equal to 0 it means that the point is exactly on the line.</p><p>We do this for each line of the triangle, and we verify that the results give us the same sign, it is important to clarify that the lines are running clockwise to the hands of the clock. Below is an example where pressing any key shows a different triangle.</p><p><details><summary>Primitive Rasterization</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>a1</span>,<span style=color:#a6e22e>a2</span>,<span style=color:#a6e22e>b1</span>,<span style=color:#a6e22e>b2</span>,<span style=color:#a6e22e>c1</span>,<span style=color:#a6e22e>c2</span>
@@ -85,111 +85,8 @@ Primitive Rasterization # Rasterization consists of taking an image in vector gr
           <body>
           </body>
         </html>
-      "></iframe></p><h2 id=buffer-z>Buffer Z
-<a class=anchor href=#buffer-z>#</a></h2><p><details><summary>Buffer Z</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>depth</span> <span style=color:#f92672>=</span> [ <span style=color:#ae81ff>255</span> , <span style=color:#ae81ff>170</span> , <span style=color:#ae81ff>0</span> , <span style=color:#ae81ff>85</span> ]
-</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>z</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span> 
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>400</span>, <span style=color:#ae81ff>400</span>, <span style=color:#a6e22e>WEBGL</span>);
-</span></span><span style=display:flex><span>  <span style=color:#75715e>// Change &#39;depth&#39; to false to turn off the depth buffer...
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// this let&#39;s you draw 3d shapes, but then 2d shapes on top,
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// without z-fighting. 3d space is basically flattened.
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// from: https://p5js.org/reference/#/p5/setAttributes
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// setAttributes(&#39;depth&#39;, true);
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>randomDepth</span> ( ) { 
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>aux_solution</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>0</span> ]
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>0</span> ]  <span style=color:#f92672>=</span> <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>3</span> ]
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> ( <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> ; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>4</span> ; <span style=color:#a6e22e>i</span> <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span> ) { 
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>aux_solution_1</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>depth</span> [ <span style=color:#a6e22e>i</span> ]
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>depth</span> [ <span style=color:#a6e22e>i</span> ] <span style=color:#f92672>=</span> <span style=color:#a6e22e>aux_solution</span> 
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>aux_solution</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>aux_solution_1</span>
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>keyTyped</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>key</span> <span style=color:#f92672>===</span> <span style=color:#e6db74>&#39;z&#39;</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> ( <span style=color:#a6e22e>z</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>true</span> ){
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>z</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
-</span></span><span style=display:flex><span>      }
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>z</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span> 
-</span></span><span style=display:flex><span>      }
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>else</span>{
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>randomDepth</span>();
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>220</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lights</span>();
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>push</span> ( )
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span> ( <span style=color:#f92672>-</span><span style=color:#ae81ff>10</span> , <span style=color:#ae81ff>10</span> , <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>0</span> ] )
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> ( <span style=color:#a6e22e>z</span> ) { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>noStroke</span> ( )
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span> ( <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>0</span> ] )
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotateY</span>(<span style=color:#ae81ff>120</span>);
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>box</span> ( <span style=color:#ae81ff>50</span> )
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span> ( )
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>push</span> ( )
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span> ( <span style=color:#f92672>-</span><span style=color:#ae81ff>20</span> , <span style=color:#f92672>-</span><span style=color:#ae81ff>20</span> , <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>1</span> ] )
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> ( <span style=color:#a6e22e>z</span> ) { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>255</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>noStroke</span> ( )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span> ( <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>1</span> ] )
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotateY</span>(<span style=color:#ae81ff>120</span>);
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sphere</span> ( <span style=color:#ae81ff>50</span> )
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span> ( )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>push</span>();
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span> ( <span style=color:#f92672>-</span><span style=color:#ae81ff>50</span> , <span style=color:#f92672>-</span><span style=color:#ae81ff>50</span> , <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>2</span> ]  )
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> ( <span style=color:#a6e22e>z</span> ) { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>255</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>noStroke</span> ( )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span> ( <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>2</span> ] )
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotateY</span>(<span style=color:#ae81ff>50</span>);
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>box</span>(<span style=color:#ae81ff>50</span>);
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span>();
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>push</span>();
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span> ( <span style=color:#ae81ff>30</span> , <span style=color:#ae81ff>30</span> , <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>3</span> ] )
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> ( <span style=color:#a6e22e>z</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>true</span> ) { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>255</span>,<span style=color:#ae81ff>255</span>,<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span> { 
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>noStroke</span> ( )
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span> ( <span style=color:#a6e22e>depth</span> [ <span style=color:#ae81ff>3</span> ] )
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotateY</span>(<span style=color:#ae81ff>200</span>);
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sphere</span> ( <span style=color:#ae81ff>45</span> )
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span>();
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=buffer_z style=width:400px;height:400px srcdoc="
+      "></iframe></p><h2 id=z-buffer>Z-Buffer
+<a class=anchor href=#z-buffer>#</a></h2><p>A z-buffer is a type of data buffer in which information about the depth of objects in 3D space from a particular perspective is stored. This helps to ensure that the correct polygons hide polygons that are further back.</p><p>It consists mainly of when you want to add a new element, it is compared pixel by pixel, and checks the buffer that currently has, if the depth is further away nothing is done, if it is greater the pixel of the element is added and the buffer is updated to the new depth.</p><p>Below is an example, you can press any key to change the location of the objects, additionally you can press the &lsquo;z&rsquo; key to see the buffer, in this case the lighter it is the closer the object is.</p><iframe id=buffer_z style=width:400px;height:400px srcdoc="
         <!DOCTYPE html>
         <html>
           <head>
@@ -205,5 +102,5 @@ Primitive Rasterization # Rasterization consists of taking an image in vector gr
           <body>
           </body>
         </html>
-      "></iframe></p><dl></dl></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/8b61da159105a6b2bc3ad10607decfc8c024b5d7 title='Last modified by Cesar Diaz | October 19, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
-<span>October 19, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#practice-rendering>Practice Rendering</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#primitive-rasterization>Primitive Rasterization</a></li><li><a href=#buffer-z>Buffer Z</a></li></ul></li></ul></nav></div></aside></main></body></html>
+      "></iframe><dl></dl></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/8ee6640d7738f54cad534c15ed74067cb56fd48e title='Last modified by Cesar Diaz | October 19, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
+<span>October 19, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#practice-rendering>Practice Rendering</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#primitive-rasterization>Primitive Rasterization</a></li><li><a href=#z-buffer>Z-Buffer</a></li></ul></li></ul></nav></div></aside></main></body></html>
