@@ -77,7 +77,7 @@ function preload() {
 let actual_score = 0;
 let high_score = 0;
 let score_button_display;
-
+let high_score_button_display;
 function setup() {
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
@@ -117,7 +117,7 @@ function setup() {
   score_button_display.style("height", score_buttons_height.toString() + "px");
   score_button_display.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
 
-  let high_score_button_display = createButton('HIGH_SCORE: ' + high_score.toString());
+  high_score_button_display = createButton('HIGH_SCORE: ' + high_score.toString());
   high_score_button_display.position((width - 125) - button_separation, button_separation);
   high_score_button_display.style("height", score_buttons_height.toString() + "px");
   high_score_button_display.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
