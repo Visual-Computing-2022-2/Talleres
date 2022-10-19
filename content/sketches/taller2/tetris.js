@@ -290,9 +290,9 @@ function check_lines() {
       if (gameMatrix[i][j] > 1)
         cur_line++;
     }
-    if (cur_line == gameMatrix[0].length)
+    if (cur_line == gameMatrix[0].length){
       lines.push(i);
-    actual_score += 100;
+      actual_score += 100;}
   }
   for (let i = 0; i < lines.length; i++) {
     let idx = lines[i];
