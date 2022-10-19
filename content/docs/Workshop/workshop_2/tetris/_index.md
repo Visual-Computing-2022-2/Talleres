@@ -41,6 +41,16 @@ In this way, we preserve the original game dynamics almost completely, but we wi
 
 As the original game, its memory is conformed by a matrix of 10x20, where the blocks will fall, and the player will be able to move them, and rotate the game board, to make the blocks fit in the matrix, but, as there are no limits on its sides, each tetrominoes can be traslated freely in the X axis. The game will be over when the blocks reach the top of the matrix.
 
+## Implementation details
+
+For more implementation details, you can check the source code on github, or in the following box:
+
+{{< details title="Tetris 3D implementation" open=false >}}
+{{< highlight js >}}
+{{% include "/sketches/taller2/tetris.js" %}}
+{{< /highlight >}}
+{{< /details >}}
+
 ## Results
 
 As a result, we got a new 3D Tetris experience, which is entertaining and fun to play. The game is playable with the keyboard, and the player can rotate the game board and the falling blocks, and change the perspective of the game. You can check it out at the top of this article.
