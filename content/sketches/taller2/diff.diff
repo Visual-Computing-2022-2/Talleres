@@ -1,0 +1,290 @@
+1c1
+< /*
+---
+> ﻿/*
+30,33c30,33
+<       [0, 8, 0, 0],
+<       [0, 8, 0, 0],
+<       [0, 8, 0, 0],
+<       [0, 8, 0, 0]
+---
+>       [0,8,0,0],
+>       [0,8,0,0],
+>       [0,8,0,0],
+>       [0,8,0,0]
+36,38c36,38
+<       [0, 0, 0],
+<       [0, 2, 0],
+<       [2, 2, 2]
+---
+>       [0,0,0],
+>       [0,2,0],
+>       [2,2,2]
+41,42c41,42
+<       [3, 3,],
+<       [3, 3,]
+---
+>       [3,3],
+>       [3,3]
+45,47c45,47
+<       [0, 0, 4],
+<       [0, 0, 4],
+<       [0, 4, 4]
+---
+>       [0,0,4],
+>       [0,0,4],
+>       [0,4,4]
+50,52c50,52
+<       [5, 0, 0],
+<       [5, 0, 0],
+<       [5, 5, 0]
+---
+>       [5,0,0],
+>       [5,0,0],
+>       [5,5,0]
+55,57c55,57
+<       [0, 0, 0],
+<       [0, 6, 6],
+<       [6, 6, 0],
+---
+>       [0,0,0],
+>       [0,6,6],
+>       [6,6,0],
+60,63c60,63
+<       [0, 0, 0],
+<       [7, 7, 0],
+<       [0, 7, 7],
+<   
+---
+>       [0,0,0],
+>       [7,7,0],
+>       [0,7,7],
+>       
+77c77
+<   
+---
+>     
+82c82
+<     for (let i = 0; i < 18 + 1 + 4; i++)
+---
+>     for(let i = 0; i<18 + 1 + 4; i++)
+84c84
+<     interval = setInterval('move_down()', 1000)
+---
+>     interval = setInterval('move_down()',1000)
+104c104
+<   
+---
+>     
+114c114
+<     if (keyIsDown(83)) {
+---
+>     if(keyIsDown(83)){
+123c123,124
+<   function rotate_token(clockwise) {
+---
+>   function rotate_token(clockwise){
+>     return;
+126,127c127,128
+<     if (clockwise) {
+<       for (let j = 0; j < side; j++) {
+---
+>     if(clockwise){
+>       for(let j = 0; j<side; j++){
+129c130
+<         for (let i = side - 1; i >= 0; i--) {
+---
+>         for(let i = side-1; i>=0; i--){
+135,136c136,137
+<     else {
+<       for (let j = side - 1; j >= 0; j--) {
+---
+>     else{
+>       for(let j = side-1; j>=0; j--){
+138c139
+<         for (let i = 0; i < side; i++) {
+---
+>         for(let i = 0; i<side; i++){
+144,147c145,148
+<   
+<     for (let i = 0; i < current_token.length; i++) {
+<       for (let j = 0; j < current_token.length; j++) {
+<         if (new_token[i][j] && gameMatrix[mod(h_token - i, 24)][mod(i_token + j, 18)] > 1)
+---
+>     
+>     for(let i = 0;i < current_token.length;i++){
+>       for(let j = 0;j < current_token.length;j++){
+>         if(new_token[i][j] && gameMatrix[mod(h_token - i,24)][mod(i_token + j, 18)] > 1)
+155,156c156,157
+<   function move_down() {
+<     if (try_move(1))
+---
+>   function move_down(){
+>     if(try_move(1))
+158,161c159,162
+<     else {
+<       for (let i = 0; i < current_token.length; i++) {
+<         for (let j = 0; j < current_token.length; j++) {
+<           if (current_token[i][j])
+---
+>     else{
+>       for(let i = 0;i<current_token.length;i++){
+>         for(let j = 0;j<current_token.length;j++){
+>           if(current_token[i][j])
+165c166,167
+<       if (check_status()) return;
+---
+>       if(check_status())
+>         return;
+171,173c173,175
+<   function check_status() {
+<     for (let i = 0; i < 18; i++) {
+<       if (gameMatrix[18][i] > 1) {
+---
+>   function check_status(){
+>     for (let i = 0;i<18;i++){
+>       if(gameMatrix[18][i] > 1){
+179c181
+<   function lose() {
+---
+>   function lose(){
+181,182c183,184
+<     for (let i = 0; i < 18; i++) {
+<       if (gameMatrix[18][i] > 1) {
+---
+>     for (let i = 0;i<18;i++){
+>       if(gameMatrix[18][i] > 1){
+184c186
+<         display(18, i, 10);
+---
+>         display(18,i,10);
+190c192
+<   function check_lines() {
+---
+>   function check_lines(){
+192,193c194,195
+<   
+<     for (let i = 1; i < gameMatrix.length; i++) {
+---
+>     
+>     for(let i = 1;i<gameMatrix.length;i++){
+195,196c197,198
+<       for (let j = 0; j < gameMatrix[0].length; j++) {
+<         if (gameMatrix[i][j] != 0)
+---
+>       for(let j = 0;j<gameMatrix[0].length;j++){
+>         if(gameMatrix[i][j] > 1)
+199c201
+<       if (cur_line == gameMatrix.length)
+---
+>       if (cur_line == gameMatrix[0].length)
+202c204
+<     for (let i = 0; i < lines.length; i++) {
+---
+>     for(let i = 0;i<lines.length;i++){
+204c206
+<       for (let j = idx; j + 1 < gameMatrix.length; j++) {
+---
+>       for(let j = idx;j + 1<gameMatrix.length;j++){
+217c219
+<   
+---
+>     
+226c228
+<         display(h, i, gameMatrix[h][i]);
+---
+>         display(h,i,gameMatrix[h][i]);
+229,231c231,233
+<   
+<     for (let i = 0; i < current_token.length; i++) {
+<       for (let j = 0; j < current_token.length; j++) {
+---
+>     
+>     for(let i = 0;i < current_token.length;i++){
+>       for(let j = 0;j < current_token.length;j++){
+233c235
+<         display(mod(h_token - i, 24), mod(i_token + j, 18), current_token[i][j]);
+---
+>         display(mod(h_token - i,24), mod(i_token + j, 18), current_token[i][j]);
+235a238
+>     
+238c241
+<   function try_move(direction) {
+---
+>   function try_move(direction){
+242c245
+<   
+---
+>     
+244,248c247,252
+<   
+<     if (direction == 1) {
+<       for (let i = 0; i < current_token.length; i++) {
+<         for (let j = 0; j < current_token.length; j++) {
+<           if (current_token[i][j] != 0 && gameMatrix[mod(h_token - i - 1, 24)][mod(i_token + j, 18)] > 1 ) {
+---
+>     
+>     if(direction == 1){
+>       for(let i = 0;i<current_token.length;i++){
+>         for(let j = 0;j<current_token.length;j++){
+>           if(gameMatrix[mod(h_token - i - 1, 24)][mod(i_token + j,18)] > 1 && current_token[i][j] != 0){
+>             print(mod(h_token - i - 1, 24), mod(i_token + j,18))
+253,256c257,260
+<     } else if (direction == 2) {
+<       for (let i = 0; i < current_token.length; i++) {
+<         for (let j = 0; j < current_token.length; j++) {
+<           if (gameMatrix[mod(h_token - i, 24)][mod(i_token + j - 1, 18)] > 1 && current_token[i][j] != 0) {
+---
+>     }else if(direction == 2){
+>       for(let i = 0;i<current_token.length;i++){
+>         for(let j = 0;j<current_token.length;j++){
+>           if(gameMatrix[mod(h_token - i,24)][mod(i_token + j - 1, 18)] > 1 && current_token[i][j] != 0){
+261,264c265,268
+<     } else if (direction == 3) {
+<       for (let i = 0; i < current_token.length; i++) {
+<         for (let j = 0; j < current_token.length; j++) {
+<           if (gameMatrix[mod(h_token - i, 24)][mod(i_token + j + 1, 18)] > 1 && current_token[i][j] != 0) {
+---
+>     }else if(direction == 3){
+>       for(let i = 0;i<current_token.length;i++){
+>         for(let j = 0;j<current_token.length;j++){
+>           if(gameMatrix[mod(h_token - i,24)][mod(i_token + j + 1, 18)] > 1 && current_token[i][j] != 0){
+273,279c277,283
+<   function display(h, i, color) {
+<     if (color == 0) return;
+<     push();
+<     fill(colors[color]);
+<     translate(cos(step * (i + 0)) * tetrisRadius, (h + 1) * (height_step + 1), sin(step * (i + 0)) * tetrisRadius);
+<     box(20);
+<     pop();
+---
+>   function display(h, i, color){
+>       if (color == 0) return;
+>       push();
+>       fill(colors[color]);
+>       translate(cos(step * (i + 0)) * tetrisRadius, (h + 1) * (height_step + 1), sin(step * (i + 0)) * tetrisRadius);
+>       box(20);
+>       pop();
+283,284c287,288
+<   function next_token() {
+<     if (current_order.length == 0) {
+---
+>   function next_token(){
+>     if(current_order.length == 0){
+296,297c300,301
+<   function keyPressed() {
+<     if (keyCode == 81) {
+---
+>   function keyPressed(){
+>     if (keyCode  == 81){
+300c304
+<     if (keyCode == 69) {
+---
+>     if (keyCode  == 69){
+303,304c307
+<   }
+<   
+\ No newline at end of file
+---
+>   }
+\ No newline at end of file
