@@ -11,7 +11,7 @@ Rendering # Primitive Rendering let a1,a2,b1,b2,c1,c2 function randomLine ( ){ a
 <label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#practice-rendering>Practice Rendering</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#rendering>Rendering</a></li><li><a href=#buffer-z>Buffer Z</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=practice-rendering>Practice Rendering
 <a class=anchor href=#practice-rendering>#</a></h1><h2 id=problem-statement>Problem statement
 <a class=anchor href=#problem-statement>#</a></h2><p>Implement in software any of the above visualizations: primitive rasterization, color shading, z-depth, texture-mapping (as illustrated above) and/or anti-aliasing (requires a bit of research).</p><h2 id=rendering>Rendering
-<a class=anchor href=#rendering>#</a></h2><details><summary>Primitive Rendering</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>a1</span>,<span style=color:#a6e22e>a2</span>,<span style=color:#a6e22e>b1</span>,<span style=color:#a6e22e>b2</span>,<span style=color:#a6e22e>c1</span>,<span style=color:#a6e22e>c2</span>
+<a class=anchor href=#rendering>#</a></h2><p><details><summary>Primitive Rendering</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>a1</span>,<span style=color:#a6e22e>a2</span>,<span style=color:#a6e22e>b1</span>,<span style=color:#a6e22e>b2</span>,<span style=color:#a6e22e>c1</span>,<span style=color:#a6e22e>c2</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>randomLine</span> ( ){
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>a1</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>int</span> ( <span style=color:#a6e22e>random</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>17</span>) ) <span style=color:#f92672>*</span> <span style=color:#ae81ff>25</span> ;
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>a2</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>int</span> ( <span style=color:#a6e22e>random</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>17</span>) ) <span style=color:#f92672>*</span> <span style=color:#ae81ff>25</span> ;
@@ -69,8 +69,24 @@ Rendering # Primitive Rendering let a1,a2,b1,b2,c1,c2 function randomLine ( ){ a
 </span></span><span style=display:flex><span> 
 </span></span><span style=display:flex><span> 
 </span></span><span style=display:flex><span> 
-</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><h2 id=buffer-z>Buffer Z
-<a class=anchor href=#buffer-z>#</a></h2><details><summary>Buffer Z</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>depth</span> <span style=color:#f92672>=</span> [ <span style=color:#ae81ff>255</span> , <span style=color:#ae81ff>170</span> , <span style=color:#ae81ff>0</span> , <span style=color:#ae81ff>85</span> ]
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=rendering style=width:525px;height:525px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js></script>
+            
+            
+            
+            
+            
+            <script src=/Talleres/sketches/taller2/rendering.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe></p><h2 id=buffer-z>Buffer Z
+<a class=anchor href=#buffer-z>#</a></h2><p><details><summary>Buffer Z</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>depth</span> <span style=color:#f92672>=</span> [ <span style=color:#ae81ff>255</span> , <span style=color:#ae81ff>170</span> , <span style=color:#ae81ff>0</span> , <span style=color:#ae81ff>85</span> ]
 </span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>z</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span> 
 </span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>400</span>, <span style=color:#ae81ff>400</span>, <span style=color:#a6e22e>WEBGL</span>);
@@ -173,5 +189,21 @@ Rendering # Primitive Rendering let a1,a2,b1,b2,c1,c2 function randomLine ( ){ a
 </span></span><span style=display:flex><span>  
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span>();
 </span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><dl></dl></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/c997bb1d95e0f593b904031b345f46687910b97b title='Last modified by Cesar Diaz | October 19, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><iframe id=buffer_z style=width:525px;height:525px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js></script>
+            
+            
+            
+            
+            
+            <script src=/Talleres/sketches/taller2/buffer_z.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe></p><dl></dl></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/0041eea242348ceb98396cfdafa7912445ef4bd8 title='Last modified by Cesar Diaz | October 19, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
 <span>October 19, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#practice-rendering>Practice Rendering</a><ul><li><a href=#problem-statement>Problem statement</a></li><li><a href=#rendering>Rendering</a></li><li><a href=#buffer-z>Buffer Z</a></li></ul></li></ul></nav></div></aside></main></body></html>
