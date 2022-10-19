@@ -34,4 +34,6 @@ Below is an example, you can press any key to change the location of the objects
 
 {{< p5-iframe sketch="/Talleres/sketches/taller2/buffer_z.js" width="425" height="425" >}}
 
+The Z-Buffer is widely used in video games and is mainly used in graphics cards because it is very easy and quite effective to parallelize it.
+
 {{<section>}}
