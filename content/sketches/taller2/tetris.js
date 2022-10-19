@@ -74,16 +74,10 @@ let i_token = -1;
 let current_token;
 
 function setup() {
-
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
   frameRate(10);
-  // normalMaterial();
-  for (let i = 0; i < 18 + 1 + 4; i++)
-    gameMatrix.push([...Array(18).fill(0)]);
-  interval = setInterval('move_down()', 1000)
-  gameMatrix[0] = [...Array(18).fill(9)];
-  gameMatrix[18] = [...Array(18).fill(1)];
+
   colors = {
     1: color("#E0DDDD"),
     2: color("#F9DC5C"),
@@ -96,12 +90,19 @@ function setup() {
     9: color("#9f9f9f"),
     10: color("#FF0034")
   }
-  next_token();
-  button = createButton('PAUSE');
-  button.position(0, 0);
+  
+  button = createButton('(RE) START');
+  button.position(10, 10);
   button.style("height", "100px");
-  button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
+  button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 0px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 115px;  height: 60px;  transition: 300ms;}.button-64:hover span {  background: none;}");
+  button.mousePressed(start_game)
+
+  button = createButton('PAUSE');
+  button.position(130, 10);
+  button.style("height", "100px");
+  button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 0px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 80px;  height: 60px;  transition: 300ms;}.button-64:hover span {  background: none;}");
   button.mousePressed(pause_function)
+  noLoop();
 }
 
 function draw() {
@@ -114,11 +115,6 @@ function draw() {
   background("#a4eaf5");
   // background(150);
   strokeWeight(1);
-  //fill(0, 0, 0, 90);
-  //cylinder(tetrisRadius + 10, 200)
-  //orbitControl();
-  // strokeWeight(20)
-  // strokeWeight(1)
 
   for (let h = 0; h < gameMatrix.length; h += 1) {
     for (let i = 0; i < gameMatrix[h].length; i += 1) {
@@ -132,6 +128,18 @@ function draw() {
       display(mod(h_token - i, 24), mod(i_token + j, 18), current_token[i][j]);
     }
   }
+}
+
+function start_game(){
+  gameMatrix = []
+  for (let i = 0; i < 18 + 1 + 4; i++)
+    gameMatrix.push([...Array(18).fill(0)]);
+  interval = setInterval('move_down()', 1000)
+  
+  gameMatrix[0] = [...Array(18).fill(9)];
+  gameMatrix[18] = [...Array(18).fill(1)];
+  next_token();
+  loop();
 }
 
 function pause_function() {
