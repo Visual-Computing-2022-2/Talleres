@@ -73,6 +73,9 @@ let h_token = 17;
 let i_token = -1;
 let current_token;
 
+function preload() {
+  img = loadImage("/Talleres/sketches/taller2/assets/texture.jpg");
+}
 function setup() {
 
   createCanvas(width, height, WEBGL);
@@ -88,7 +91,7 @@ function setup() {
     1: color("#E0DDDD"),
     2: color("#F9DC5C"),
     3: color("#98F3F6"),
-    4: color("#F4FFFD"),
+    4: color("#44BA3D"),
     5: color("#C08AE9"),
     6: color("#F39A9D"),
     7: color("#C6ECAE"),
@@ -252,6 +255,42 @@ function check_lines() {
     gameMatrix[HEIGHT_GAME_MATRIX - 1] = [...Array(18).fill(0)]
   }
   gameMatrix[gameMatrix.length - 1] = [...Array(18).fill(0)]
+}
+
+function draw() {
+  // create a classic plane -> h positive to go up ad
+  translate(0, -1, 0);
+  checkKeys();
+
+  camera(camX, camY, camZ, centerX, centerY, centerZ, 0, -1, 0);
+
+  background(240);
+  strokeWeight(1);
+  push();
+  texture(img);
+  noStroke();
+  translate(0, 300, 0);
+  sphere(650);
+  pop();
+
+  //fill(0, 0, 0, 90);
+  //cylinder(tetrisRadius + 10, 200)
+  //orbitControl();
+  // strokeWeight(20)
+  // strokeWeight(1)
+
+  for (let h = 0; h < gameMatrix.length; h += 1) {
+    for (let i = 0; i < gameMatrix[h].length; i += 1) {
+      display(h, i, gameMatrix[h][i]);
+    }
+  }
+
+  for (let i = 0; i < current_token.length; i++) {
+    for (let j = 0; j < current_token.length; j++) {
+      // print(h_token)
+      display(mod(h_token - i, 24), mod(i_token + j, 18), current_token[i][j]);
+    }
+  }
 }
 
 function try_move(direction) {
