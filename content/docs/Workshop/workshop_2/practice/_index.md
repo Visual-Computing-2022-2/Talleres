@@ -12,6 +12,7 @@ Implement in software any of the above visualizations: primitive rasterization, 
 {{% include "/sketches/taller2/rendering.js" %}}
 {{< /highlight >}}
 {{< /details >}}
+{{< p5-iframe sketch="/Talleres/sketches/taller2/rendering.js" width="525" height="525" >}}
 
 ## Buffer Z
 {{< details title="Buffer Z" open=false >}}
@@ -19,5 +20,6 @@ Implement in software any of the above visualizations: primitive rasterization, 
 {{% include "/sketches/taller2/buffer_z.js" %}}
 {{< /highlight >}}
 {{< /details >}}
+{{< p5-iframe sketch="/Talleres/sketches/taller2/buffer_z.js" width="525" height="525" >}}
 
 {{<section>}}
