@@ -73,16 +73,18 @@ let h_token = 17;
 let i_token = -1;
 let current_token;
 
+function preload() {
+  img = loadImage("/Talleres/sketches/taller2/assets/texture.jpg");
+}
 function setup() {
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
   frameRate(10);
-
   colors = {
     1: color("#E0DDDD"),
     2: color("#F9DC5C"),
     3: color("#98F3F6"),
-    4: color("#F4FFFD"),
+    4: color("#44BA3D"),
     5: color("#C08AE9"),
     6: color("#F39A9D"),
     7: color("#C6ECAE"),
@@ -112,9 +114,14 @@ function draw() {
 
   camera(camX, camY, camZ, centerX, centerY, centerZ, 0, -1, 0);
 
-  background("#a4eaf5");
-  // background(150);
+  background(240);
   strokeWeight(1);
+  push();
+  texture(img);
+  noStroke();
+  translate(0, 300, 0);
+  sphere(650);
+  pop();
 
   for (let h = 0; h < gameMatrix.length; h += 1) {
     for (let i = 0; i < gameMatrix[h].length; i += 1) {
@@ -144,8 +151,8 @@ function start_game(){
 
 function pause_function() {
   if (isLooping()) {
-    noLoop();
     clearInterval(interval)
+    noLoop();
   }
   else {
     loop()
