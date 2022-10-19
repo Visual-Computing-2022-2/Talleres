@@ -253,7 +253,7 @@ function try_move(direction) {
     } else if (direction == 2) {
         for (let i = 0; i < current_token.length; i++) {
             for (let j = 0; j < current_token.length; j++) {
-                if (gameMatrix[mod(h_token - i, 24)][mod(i_token + j - 1, 18)] > 1 && current_token[i][j] != 0) {
+                if (current_token[i][j] != 0 && gameMatrix[mod(h_token - i, 24)][mod(i_token + j - 1, 18)] > 1) {
                     sum++;
                 }
             }
