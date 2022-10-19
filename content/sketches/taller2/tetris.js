@@ -193,10 +193,17 @@ function check_lines() {
     for (let i = 1; i < gameMatrix.length; i++) {
         let cur_line = 0;
         for (let j = 0; j < gameMatrix[0].length; j++) {
+<<<<<<< HEAD
             if (gameMatrix[i][j] > 1)
                 cur_line++;
         }
         if (cur_line == gameMatrix[0].length)
+=======
+            if (gameMatrix[i][j] != 0)
+                cur_line++;
+        }
+        if (cur_line == gameMatrix.length)
+>>>>>>> 8122143520e695223a7d6aa51919549a2e5dbf4a
             lines.push(i);
     }
     for (let i = 0; i < lines.length; i++) {
@@ -300,4 +307,8 @@ function keyPressed() {
     if (keyCode == 69) {
         rotate_token(false);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 8122143520e695223a7d6aa51919549a2e5dbf4a
