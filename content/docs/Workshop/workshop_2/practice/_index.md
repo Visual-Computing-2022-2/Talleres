@@ -24,12 +24,14 @@ We do this for each line of the triangle, and we verify that the results give us
 {{< /details >}}
 {{< p5-iframe sketch="/Talleres/sketches/taller2/rendering.js" width="450" height="450" >}}
 
-## Buffer Z
-{{< details title="Buffer Z" open=false >}}
-{{< highlight js >}}
-{{% include "/sketches/taller2/buffer_z.js" %}}
-{{< /highlight >}}
-{{< /details >}}
+## Z-Buffer
+
+A z-buffer is a type of data buffer in which information about the depth of objects in 3D space from a particular perspective is stored. This helps to ensure that the correct polygons hide polygons that are further back.
+
+It consists mainly of when you want to add a new element, it is compared pixel by pixel, and checks the buffer that currently has, if the depth is further away nothing is done, if it is greater the pixel of the element is added and the buffer is updated to the new depth.
+
+Below is an example, you can press any key to change the location of the objects, additionally you can press the 'z' key to see the buffer, in this case the lighter it is the closer the object is.
+
 {{< p5-iframe sketch="/Talleres/sketches/taller2/buffer_z.js" width="400" height="400" >}}
 
 {{<section>}}
