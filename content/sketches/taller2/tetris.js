@@ -323,9 +323,9 @@ function next_token() {
 }
 
 
-function mouseWheel(event) {
-  cameraDistance += (event.delta / 10);
-}
+// function mouseWheel(event) {
+//   cameraDistance += (event.delta / 10);
+// }
 
 function keyPressed() {
   if (keyCode == 81) {
