@@ -1,4 +1,4 @@
-/*
+﻿/*
   Game's logic:
   We mantain a 2D matrix holding the game's state 18x18
   This matrix will hold the current box placed in a cell (save the color), or 0 if the cell is empty.
@@ -101,8 +101,8 @@ function setup() {
     10: color("#FF0034")
   }
   next_token();
-  button = createButton('PAUSE');
-  button.position(0, 0);
+  button = createButton('II');
+  button.position(10, 10);
   button.style("height", "100px");
   button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
 }
@@ -223,14 +223,12 @@ function check_lines() {
   gameMatrix[gameMatrix.length - 1] = [...Array(18).fill(0)]
 }
 
-function toggle_loop() {
+function pause_function() {
   if (isLooping()) {
     noLoop();
     clearInterval(interval)
   }
   else loop()
-
-
 }
 
 function draw() {
@@ -239,7 +237,7 @@ function draw() {
   // create a classic plane -> h positive to go up ad
   button = createButton('II');
   button.position(10, 10);
-  button.mousePressed(toggle_loop);
+  button.mousePressed(pause_function);
   
 
   let score_place_holder = text("SCORE: ", 100, 100)
