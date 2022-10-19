@@ -75,14 +75,16 @@ let current_token;
 
 function preload() {
   img = loadImage("/Talleres/sketches/taller2/assets/backdark.jpg");
+  // img = loadImage("/Talleres/sketches/taller1/assets/turquia.jpg");
+  // img = loadImage("/content/sketches/taller2/assets/backdark.jpg");
 }
 
 
 function setup() {
-
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
   frameRate(10);
+  pg = createGraphics(200, 200);
   // normalMaterial();
   for (let i = 0; i < 18 + 1 + 4; i++)
     gameMatrix.push([...Array(18).fill(0)]);
@@ -218,13 +220,25 @@ function check_lines() {
 
 function draw() {
   // create a classic plane -> h positive to go up ad
+  
+  // background(img);
   translate(0, -1, 0);
   checkKeys();
-  orbitControl();
-
+  // pg.background(200);
+  // push();
+  // texture(img);
+  // textureMode(NORMAL);
+  // beginShape();
+  // vertex(-40, -40, 0, 0);
+  // vertex(40, -40, 1, 0);
+  // vertex(40, 40, 1, 1);
+  // vertex(-40, 40, 0, 1);
+  // endShape();
+  // pop();
+  
   camera(camX, camY, camZ, centerX, centerY, centerZ, 0, -1, 0);
 
-  background(240);
+  background(color('#213'));
   // strokeWeight(20)
   // strokeWeight(1)
 
