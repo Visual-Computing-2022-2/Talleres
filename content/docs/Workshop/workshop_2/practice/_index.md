@@ -22,7 +22,7 @@ We do this for each line of the triangle, and we verify that the results give us
 {{% include "/sketches/taller2/rendering.js" %}}
 {{< /highlight >}}
 {{< /details >}}
-{{< p5-iframe sketch="/Talleres/sketches/taller2/rendering.js" width="450" height="450" >}}
+{{< p5-iframe sketch="/Talleres/sketches/taller2/rendering.js" width="425" height="425" >}}
 
 ## Z-Buffer
 
@@ -32,6 +32,6 @@ It consists mainly of when you want to add a new element, it is compared pixel b
 
 Below is an example, you can press any key to change the location of the objects, additionally you can press the 'z' key to see the buffer, in this case the lighter it is the closer the object is.
 
-{{< p5-iframe sketch="/Talleres/sketches/taller2/buffer_z.js" width="400" height="400" >}}
+{{< p5-iframe sketch="/Talleres/sketches/taller2/buffer_z.js" width="425" height="425" >}}
 
 {{<section>}}
