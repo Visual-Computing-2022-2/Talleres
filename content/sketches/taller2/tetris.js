@@ -73,25 +73,21 @@ let h_token = 17;
 let i_token = -1;
 let current_token;
 
+function preload() {
+  img = loadImage("/Talleres/sketches/taller2/assets/texture.jpg");
+}
 let actual_score = 0;
 let high_score = 0;
 
 function setup() {
-
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
   frameRate(10);
-  // normalMaterial();
-  for (let i = 0; i < 18 + 1 + 4; i++)
-    gameMatrix.push([...Array(18).fill(0)]);
-  interval = setInterval('move_down()', 1000)
-  gameMatrix[0] = [...Array(18).fill(9)];
-  gameMatrix[18] = [...Array(18).fill(1)];
   colors = {
     1: color("#E0DDDD"),
     2: color("#F9DC5C"),
     3: color("#98F3F6"),
-    4: color("#F4FFFD"),
+    4: color("#44BA3D"),
     5: color("#C08AE9"),
     6: color("#F39A9D"),
     7: color("#C6ECAE"),
@@ -99,12 +95,19 @@ function setup() {
     9: color("#9f9f9f"),
     10: color("#FF0034")
   }
-  next_token();
-  button = createButton('PAUSE');
-  button.position(0, 0);
+  
+  button = createButton('(RE) START');
+  button.position(10, 10);
   button.style("height", "100px");
-  button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
+  button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 0px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 115px;  height: 60px;  transition: 300ms;}.button-64:hover span {  background: none;}");
+  button.mousePressed(start_game)
+
+  button = createButton('PAUSE');
+  button.position(130, 10);
+  button.style("height", "100px");
+  button.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 0px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 80px;  height: 60px;  transition: 300ms;}.button-64:hover span {  background: none;}");
   button.mousePressed(pause_function)
+  noLoop();
 
   const button_separation = 20;
   const score_buttons_width = 300;
@@ -139,14 +142,14 @@ function draw() {
 
   camera(camX, camY, camZ, centerX, centerY, centerZ, 0, -1, 0);
 
-  background("#a4eaf5");
-  // background(150);
+  background(240);
   strokeWeight(1);
-  //fill(0, 0, 0, 90);
-  //cylinder(tetrisRadius + 10, 200)
-  //orbitControl();
-  // strokeWeight(20)
-  // strokeWeight(1)
+  push();
+  texture(img);
+  noStroke();
+  translate(0, 300, 0);
+  sphere(650);
+  pop();
 
 
 
@@ -164,10 +167,22 @@ function draw() {
   }
 }
 
+function start_game(){
+  gameMatrix = []
+  for (let i = 0; i < 18 + 1 + 4; i++)
+    gameMatrix.push([...Array(18).fill(0)]);
+  interval = setInterval('move_down()', 1000)
+  
+  gameMatrix[0] = [...Array(18).fill(9)];
+  gameMatrix[18] = [...Array(18).fill(1)];
+  next_token();
+  loop();
+}
+
 function pause_function() {
   if (isLooping()) {
-    noLoop();
     clearInterval(interval)
+    noLoop();
   }
   else {
     loop()
@@ -357,6 +372,3 @@ function keyPressed() {
     rotate_token(false);
   }
 }
-
-// Aviso legal: El contenido de este mensaje y los archivos adjuntos son confidenciales y de uso exclusivo de la Universidad Nacional de Colombia. Se encuentran dirigidos sólo para el uso del destinatario al cual van enviados. La reproducción, lectura y/o copia se encuentran prohibidas a cualquier persona diferente a este y puede ser ilegal. Si usted lo ha recibido por error, infórmenos y elimínelo de su correo. Los Datos Personales serán tratados conforme a la Ley 1581 de 2012 y a nuestra Política de Datos Personales que podrá consultar en la página web www.unal.edu.co. Las opiniones, informaciones, conclusiones y cualquier otro tipo de dato contenido en este correo electrónico, no relacionados con la actividad de la Universidad Nacional de Colombia, se entenderá como personales y de ninguna manera son avaladas por la Universidad.
-
