@@ -1,4 +1,4 @@
-let depth = [ 200 , 140 , 0 , 70 ]
+let depth = [ 255 , 190 , 140 , 80 ]
 let z = true 
 function setup() {
   createCanvas(400, 400, WEBGL);
@@ -35,8 +35,7 @@ function keyTyped() {
 }
 
 function draw() {
-  background(255);
-  lights();
+  background(0);
   
   push ( )
   
