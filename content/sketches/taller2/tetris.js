@@ -9,8 +9,6 @@ function mod(n, m) {
   return ((n % m) + m) % m;
 }
 
-// mod = (n, m) => ((n % m) + m) % m;
-
 let gameMatrix = Array();
 const WIDTH_GAME_MATRIX = 18
 const HEIGHT_GAME_MATRIX = 18
@@ -95,7 +93,7 @@ function setup() {
     9: color("#9f9f9f"),
     10: color("#FF0034")
   }
-  
+
   button = createButton('(RE) START');
   button.position(10, 10);
   button.style("height", "100px");
@@ -117,14 +115,14 @@ function setup() {
   score_button_display.position((width - score_buttons_width) - button_separation, button_separation);
   score_button_display.style("height", score_buttons_height.toString() + "px");
   score_button_display.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
-  
+
   let high_score_button_display = createButton('HIGH_SCORE: ' + high_score.toString());
   high_score_button_display.position((width - 125) - button_separation, button_separation);
   high_score_button_display.style("height", score_buttons_height.toString() + "px");
   high_score_button_display.style(".button-64 {  align-items: center;  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);  border: 0;  border-radius: 8px;  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;  box-sizing: border-box;  color: #FFFFFF;  display: flex;  font-family: Phantomsans, sans-serif;  font-size: 20px;  justify-content: center;  line-height: 1em;  max-width: 100%;  min-width: 140px;  padding: 3px;  text-decoration: none;  user-select: none;  -webkit-user-select: none;  touch-action: manipulation;  white-space: nowrap;  cursor: pointer;}.button-64:active,.button-64:hover {  outline: 0;}.button-64 span {  background-color: rgb(5, 6, 45);  padding: 16px 24px;  border-radius: 6px;  width: 100px;  height: 100px;  transition: 300ms;}.button-64:hover span {  background: none;}");
 }
 
-function restart(){
+function restart() {
   gameMatrix = [];
   for (let i = 0; i < 18 + 1 + 4; i++)
     gameMatrix.push([...Array(18).fill(0)]);
@@ -167,12 +165,12 @@ function draw() {
   }
 }
 
-function start_game(){
+function start_game() {
   gameMatrix = []
   for (let i = 0; i < 18 + 1 + 4; i++)
     gameMatrix.push([...Array(18).fill(0)]);
   interval = setInterval('move_down()', 1000)
-  
+
   gameMatrix[0] = [...Array(18).fill(9)];
   gameMatrix[18] = [...Array(18).fill(1)];
   next_token();
@@ -294,7 +292,7 @@ function check_lines() {
     }
     if (cur_line == gameMatrix[0].length)
       lines.push(i);
-      actual_score += 100;
+    actual_score += 100;
   }
   for (let i = 0; i < lines.length; i++) {
     let idx = lines[i];
