@@ -72,12 +72,16 @@ let current_order = [...tokens];
 let h_token = 17;
 let i_token = -1;
 let current_token;
+let high_score = 0
+let actual_score = 0
 
 function setup() {
 
   createCanvas(width, height, WEBGL);
   angleMode(DEGREES);
   frameRate(10);
+  textFont('Silkscreen-Regular.ttf');
+  textSize(32);
   // normalMaterial();
   for (let i = 0; i < 18 + 1 + 4; i++)
     gameMatrix.push([...Array(18).fill(0)]);
@@ -97,6 +101,11 @@ function setup() {
     10: color("#FF0034")
   }
   next_token();
+}
+
+let scores_fonts;
+function preload() {
+  scores_fonts = loadFont('Silkscreen-Regular.ttf');
 }
 
 
@@ -184,6 +193,7 @@ function lose() {
       display(18, i, 10);
     }
   }
+
   noLoop()
 }
 
@@ -210,17 +220,26 @@ function check_lines() {
 }
 
 function toggle_loop() {
-  if (isLooping()) noLoop();
+  if (isLooping()) {
+    noLoop();
+    clearInterval(interval)
+  }
   else loop()
 
 
 }
 
 function draw() {
+  clear()
+  
   // create a classic plane -> h positive to go up ad
   button = createButton('II');
   button.position(10, 10);
   button.mousePressed(toggle_loop);
+  
+
+  let score_place_holder = text("SCORE: ", 100, 100)
+  fill(0, 102, 153);
 
 
   // create a classic plane -> h positive to go up ad
@@ -280,7 +299,13 @@ function try_move(direction) {
       }
     }
   }
+  // score_text = text("SCORE", 10,10)
+  // score_text.position(100,100)
+  // loop()
+  // text('High Score: ', 100, 100, 100);
   return sum == 0;
+
+
 }
 
 function display(h, i, color) {
