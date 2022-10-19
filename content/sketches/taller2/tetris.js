@@ -209,9 +209,20 @@ function check_lines() {
   gameMatrix[gameMatrix.length - 1] = [...Array(18).fill(0)]
 }
 
+function toggle_loop() {
+  if (isLooping()) noLoop();
+  else loop()
 
+
+}
 
 function draw() {
+  // create a classic plane -> h positive to go up ad
+  button = createButton('II');
+  button.position(10, 10);
+  button.mousePressed(toggle_loop);
+
+
   // create a classic plane -> h positive to go up ad
   translate(0, -1, 0);
   checkKeys();
