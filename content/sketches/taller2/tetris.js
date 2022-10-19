@@ -73,6 +73,11 @@ let h_token = 17;
 let i_token = -1;
 let current_token;
 
+function preload() {
+  img = loadImage("/Talleres/sketches/taller2/assets/backdark.jpg");
+}
+
+
 function setup() {
 
     createCanvas(width, height, WEBGL);
