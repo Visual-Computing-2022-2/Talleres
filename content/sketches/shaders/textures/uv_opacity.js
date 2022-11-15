@@ -9,8 +9,8 @@ function preload() {
   // leads to the same gl_Position result.
   // Interpolate only texture coordinates (i.e., varyings: Tree.texcoords2).
   // see: https://github.com/VisualComputing/p5.treegl#handling
-  uvShader = readShader('/Talleres/sketches/shaders/textures/uv_opacity.frag',
-              { matrices: Tree.pmvMatrix, varyings: Tree.texcoords2 });
+  tintingShader = readShader('/Talleres/sketches/shaders/textures/uv_opacity.frag',
+    { matrices: Tree.pmvMatrix, varyings: Tree.texcoords2 });
 }
 
 function setup() {
@@ -45,9 +45,9 @@ function draw() {
   fill(color(0, 255, 255, 125));
   sphere(30, 50);
   // use custom shader
-  shader(uvShader);
+  shader(tintingShader);
   // https://p5js.org/reference/#/p5.Shader/setUniform
-  uvShader.setUniform('opacity', opacity.value());
+  tintingShader.setUniform('opacity', opacity.value());
   // screen-space quad (i.e., x ∈ [0..width] and y ∈ [0..height])
   // see: https://github.com/VisualComputing/p5.treegl#heads-up-display
   beginHUD();
