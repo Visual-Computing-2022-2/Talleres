@@ -1,0 +1,51 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=" Coloring # "><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Coloring/"><title>Coloring | Visual Computing</title><link rel=manifest href=/Talleres/manifest.json><link rel=icon href=/Talleres/favicon.png type=image/x-icon><link rel=stylesheet href=/Talleres/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/Talleres/flexsearch.min.js></script>
+<script defer src=/Talleres/en.search.min.99b79053943f64fc5459bcdfeb2bac6fdadc02b9951f5ef33bf449e945a96a16.js integrity="sha256-mbeQU5Q/ZPxUWbzf6yusb9rcArmVH17zO/RJ6UWpahY=" crossorigin=anonymous></script>
+<link rel=alternate type=application/rss+xml href=https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Coloring/index.xml title="Visual Computing"></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/Talleres/><span>Visual Computing</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li class=book-section-flat><span>Workshop</span><ul><li><input type=checkbox id=section-890fdf72107ced932b57ba979e798b88 class=toggle checked>
+<label for=section-890fdf72107ced932b57ba979e798b88 class="flex justify-between"><a role=button>Shaders</a></label><ul><li><a href=/Talleres/docs/Workshop/Shaders/Coloring/ class=active>Coloring</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Image_Processing/>Image Processing</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Spatial_Coherence/>Spatial Coherence</a><ul></ul></li></ul></li><li><input type=checkbox id=section-8d2b6a08245086db5d9347a14c60b971 class=toggle>
+<label for=section-8d2b6a08245086db5d9347a14c60b971 class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_1/>Workshop 1</a></label><ul><li><a href=/Talleres/docs/Workshop/workshop_1/masking/>Masking</a></li><li><input type=checkbox id=section-2aa212ced681e7ddb472ce2ea2174f76 class=toggle>
+<label for=section-2aa212ced681e7ddb472ce2ea2174f76 class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_1/visual_ilussion/>Visual Ilussion</a></label><ul><li><a href=/Talleres/docs/Workshop/workshop_1/visual_ilussion/frisensLazyShadow/>Frisens Lazy Shadow</a></li><li><a href=/Talleres/docs/Workshop/workshop_1/visual_ilussion/jastrowIllusion/>Jastrow Illusion</a></li><li><a href=/Talleres/docs/Workshop/workshop_1/visual_ilussion/kinegramScanimation/>Kinegram Scanimation</a></li><li><a href=/Talleres/docs/Workshop/workshop_1/visual_ilussion/steppingFeetMotionIllusion/>Stepping Feet Motion Illusion</a></li></ul></li></ul></li><li><input type=checkbox id=section-6f90cee8795c0cd7b85a94bc2603fc3f class=toggle>
+<label for=section-6f90cee8795c0cd7b85a94bc2603fc3f class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_2/>Workshop 2</a></label><ul><li><input type=checkbox id=section-673b9b4bfd505a1d2632f367f1a8e21b class=toggle>
+<label for=section-673b9b4bfd505a1d2632f367f1a8e21b class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_2/practice/>Practice</a></label><ul></ul></li><li><input type=checkbox id=section-a1f74c2d4e02c95786884d1e3422628e class=toggle>
+<label for=section-a1f74c2d4e02c95786884d1e3422628e class="flex justify-between"><a role=button>Rasterization</a></label><ul><li><a href=/Talleres/docs/Workshop/workshop_2/rasterization/colorShading/>Color Shading</a></li><li><a href=/Talleres/docs/Workshop/workshop_2/rasterization/textureMapping/>Texture Mapping</a></li></ul></li><li><a href=/Talleres/docs/Workshop/workshop_2/tetris/>Tetris</a><ul></ul></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/Talleres/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>Coloring</strong>
+<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#coloring>Coloring</a></li></ul></nav></aside></header><article class=markdown><h1 id=coloring>Coloring
+<a class=anchor href=#coloring>#</a></h1><iframe id=color style=width:525px;height:525px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js></script>
+            <script src=https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js></script>
+            <script src=https://freshfork.github.io/p5.EasyCam/p5.easycam.js></script>
+             <script src=https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js></script> 
+            
+            
+            
+            
+            <script src=/Talleres/sketches/shaders/coloring/color_mode/color.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe>
+<iframe id=color style=width:525px;height:525px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js></script>
+            <script src=https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js></script>
+            <script src=https://freshfork.github.io/p5.EasyCam/p5.easycam.js></script>
+            
+            
+            
+            
+            
+            <script src=/Talleres/sketches/shaders/coloring/color_binding/color.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/d24b871bd1286ad507d1c167826c8f8c7de01ad3 title='Last modified by dasilvaca | November 19, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
+<span>November 19, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#coloring>Coloring</a></li></ul></nav></div></aside></main></body></html>
