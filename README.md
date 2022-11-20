@@ -4,7 +4,7 @@ Welcome to the [gohugo](https://gohugo.io/) template to create rich content [aca
 
 ## Hacking
 
-Install the [gohugo](https://gohugo.io/) [static site generator](https://jamstack.org/generators/) then:
+Install the [gohugo]( ) [static site generator](https://jamstack.org/generators/) then:
 
 ```sh
 $git clone https://github.com/VisualComputing/showcase
