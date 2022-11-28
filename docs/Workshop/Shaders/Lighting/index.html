@@ -1,5 +1,5 @@
 <!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Colored Ambient Light # Code # Colored Ambient Light let easycam; let objects; let colorShader; let ambient, ambient4; function preload() { colorShader = readShader( &#34;/Talleres/sketches/shaders/lighting/ambient_color.frag&#34;, { varyings: Tree.NONE, } ); } function setup() { createCanvas(600, 600, WEBGL); textureMode(NORMAL); noStroke(); setAttributes(&#34;antialias&#34;, true); let easyCamState = { distance: 325, center: [0, 0, 0], rotation: [0.25, 0.25, 0, 1], }; easycam = new Dw.EasyCam(this._renderer); easycam.state_reset = easyCamState; easycam.setState(easyCamState, 2000); document.oncontextmenu = function () { return false; }; colorMode(RGB, 1); let maxPos = 100; objects = []; for (let i = 0; i < 40; i++) { objects."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Lighting/"><title>Lighting | Visual Computing</title><link rel=manifest href=/Talleres/manifest.json><link rel=icon href=/Talleres/favicon.png type=image/x-icon><link rel=stylesheet href=/Talleres/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css integrity="sha256-SzX+0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt+5t7EDugY=" crossorigin=anonymous><script defer src=/Talleres/flexsearch.min.js></script>
-<script defer src=/Talleres/en.search.min.67086949178229213d4266a3fe9b2b4357f8cc1bc180d8c32b4579e3b8a334b3.js integrity="sha256-ZwhpSReCKSE9Qmaj/psrQ1f4zBvBgNjDK0V547ijNLM=" crossorigin=anonymous></script>
+<script defer src=/Talleres/en.search.min.bbd467128e73affd92b24dae18af651a0f08fe94781cbfb1503e099b14ed62ce.js integrity="sha256-u9RnEo5zr/2Ssk2uGK9lGg8I/pR4HL+xUD4JmxTtYs4=" crossorigin=anonymous></script>
 <link rel=alternate type=application/rss+xml href=https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Lighting/index.xml title="Visual Computing"></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/Talleres/><span>Visual Computing</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li class=book-section-flat><a href=/Talleres/docs/Workshop/>Workshop</a><ul><li><input type=checkbox id=section-890fdf72107ced932b57ba979e798b88 class=toggle checked>
 <label for=section-890fdf72107ced932b57ba979e798b88 class="flex justify-between"><a role=button>Shaders</a></label><ul><li><a href=/Talleres/docs/Workshop/Shaders/Coloring/>Coloring</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Image_Processing/>Image Processing</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Lighting/ class=active>Lighting</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Photomosaic/>Photomosaic</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Spatial_Coherence/>Spatial Coherence</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Textures/>Textures</a><ul></ul></li></ul></li><li><input type=checkbox id=section-8d2b6a08245086db5d9347a14c60b971 class=toggle>
@@ -9,7 +9,7 @@
 <label for=section-673b9b4bfd505a1d2632f367f1a8e21b class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_2/practice/>Practice</a></label><ul></ul></li><li><input type=checkbox id=section-a1f74c2d4e02c95786884d1e3422628e class=toggle>
 <label for=section-a1f74c2d4e02c95786884d1e3422628e class="flex justify-between"><a role=button>Rasterization</a></label><ul><li><a href=/Talleres/docs/Workshop/workshop_2/rasterization/colorShading/>Color Shading</a></li><li><a href=/Talleres/docs/Workshop/workshop_2/rasterization/textureMapping/>Texture Mapping</a></li></ul></li><li><a href=/Talleres/docs/Workshop/workshop_2/tetris/>Tetris</a><ul></ul></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/Talleres/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>Lighting</strong>
-<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li><li><a href=#toon-shading>Toon shading</a><ul><li><a href=#code-1>Code</a></li><li><a href=#visualization-1>Visualization</a></li></ul></li><li><a href=#specular-reflection>Specular reflection</a><ul><li><a href=#code-2>Code</a></li><li><a href=#visualization-2>Visualization</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=colored-ambient-light>Colored Ambient Light
+<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li><li><a href=#toon-shading>Toon shading</a><ul><li><a href=#code-1>Code</a></li><li><a href=#visualization-1>Visualization</a></li></ul></li><li><a href=#specular-reflection>Specular reflection</a><ul><li><a href=#code-2>Code</a></li><li><a href=#visualization-2>Visualization</a></li></ul></li><li><a href=#mixed-lighting>Mixed lighting</a><ul><li><a href=#code-3>Code</a></li><li><a href=#visualization-3>Visualization</a></li><li><a href=#conclusions>Conclusions</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=colored-ambient-light>Colored Ambient Light
 <a class=anchor href=#colored-ambient-light>#</a></h1><h2 id=code>Code
 <a class=anchor href=#code>#</a></h2><details><summary>Colored Ambient Light</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>easycam</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>objects</span>;
@@ -103,6 +103,14 @@
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>pop</span>();
 </span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Colored Ambient Light Shader</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-glsl data-lang=glsl><span style=display:flex><span><span style=color:#66d9ef>precision</span> <span style=color:#66d9ef>mediump</span> <span style=color:#66d9ef>float</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>uniform</span> <span style=color:#66d9ef>float</span> ambient;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>uniform</span> <span style=color:#66d9ef>vec4</span> ambient4;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>uniform</span> <span style=color:#66d9ef>vec4</span> uMaterialColor;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> main() {
+</span></span><span style=display:flex><span>  gl_FragColor <span style=color:#f92672>=</span> ambient <span style=color:#f92672>*</span> ambient4 <span style=color:#f92672>*</span> uMaterialColor;
 </span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><h2 id=visualization>Visualization
 <a class=anchor href=#visualization>#</a></h2><iframe id=coloredAmbientLight style=width:625px;height:625px srcdoc="
         <!DOCTYPE html>
@@ -220,6 +228,18 @@
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>pop</span>();
 </span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Toon shading Shader</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-glsl data-lang=glsl><span style=display:flex><span><span style=color:#66d9ef>precision</span> <span style=color:#66d9ef>mediump</span> <span style=color:#66d9ef>float</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>uniform</span> <span style=color:#66d9ef>vec4</span> ambient4;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>uniform</span> <span style=color:#66d9ef>vec4</span> uMaterialColor;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>uniform</span> <span style=color:#66d9ef>vec3</span> lightNormal;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>varying</span> <span style=color:#66d9ef>vec3</span> normal3;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> main() {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> intensity <span style=color:#f92672>=</span> max(<span style=color:#ae81ff>0.0</span>, dot(normalize(<span style=color:#f92672>-</span>lightNormal), normalize(normal3)));
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> k <span style=color:#f92672>=</span> intensity <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.95</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>1.0</span> <span style=color:#f92672>:</span> intensity <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>0.6</span> <span style=color:#f92672>:</span> intensity <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.25</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>0.4</span> <span style=color:#f92672>:</span> <span style=color:#ae81ff>0.2</span>;
+</span></span><span style=display:flex><span>  gl_FragColor <span style=color:#f92672>=</span> k <span style=color:#f92672>*</span> ambient4 <span style=color:#f92672>*</span> uMaterialColor;
 </span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><h2 id=visualization-1>Visualization
 <a class=anchor href=#visualization-1>#</a></h2><iframe id=toonShading style=width:625px;height:625px srcdoc="
         <!DOCTYPE html>
@@ -241,114 +261,129 @@
         </html>
       "></iframe><h1 id=specular-reflection>Specular reflection
 <a class=anchor href=#specular-reflection>#</a></h1><h2 id=code-2>Code
-<a class=anchor href=#code-2>#</a></h2><details><summary>Specular reflection</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#e6db74>&#34;use strict&#34;</span>;
+<a class=anchor href=#code-2>#</a></h2><details><summary>Specular reflection</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-glsl data-lang=glsl><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>&#34;</span>use strict<span style=color:#960050;background-color:#1e0010>&#34;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>easycam</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>objects</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>lightShader</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>ambient</span>;
+</span></span><span style=display:flex><span>let easycam;
+</span></span><span style=display:flex><span>let objects;
+</span></span><span style=display:flex><span>let specularShader;
+</span></span><span style=display:flex><span>let ambient;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>preload</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>readShader</span>(
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;/Talleres/sketches/shaders/lighting/specular.frag&#34;</span>,
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  specularShader <span style=color:#f92672>=</span> readShader(
+</span></span><span style=display:flex><span>    <span style=color:#960050;background-color:#1e0010>&#34;</span><span style=color:#f92672>/</span>Talleres<span style=color:#f92672>/</span>sketches<span style=color:#f92672>/</span>shaders<span style=color:#f92672>/</span>lighting<span style=color:#f92672>/</span>specular.frag<span style=color:#960050;background-color:#1e0010>&#34;</span>,
 </span></span><span style=display:flex><span>    {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>varyings</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>normal3</span> <span style=color:#f92672>|</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>position4</span>,
+</span></span><span style=display:flex><span>      varyings<span style=color:#f92672>:</span> Tree.normal3 <span style=color:#f92672>|</span> Tree.position4,
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>  );
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>600</span>, <span style=color:#a6e22e>WEBGL</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>noLights</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>colorMode</span>(<span style=color:#a6e22e>RGB</span>, <span style=color:#ae81ff>1</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>setAttributes</span>(<span style=color:#e6db74>&#34;antialias&#34;</span>, <span style=color:#66d9ef>true</span>);
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>easyCamState</span> <span style=color:#f92672>=</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>distance</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>325</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>center</span><span style=color:#f92672>:</span> [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>],
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotation</span><span style=color:#f92672>:</span> [<span style=color:#ae81ff>0.25</span>, <span style=color:#ae81ff>0.25</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>],
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(<span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>600</span>, WEBGL);
+</span></span><span style=display:flex><span>  noLights();
+</span></span><span style=display:flex><span>  colorMode(RGB, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>  setAttributes(<span style=color:#960050;background-color:#1e0010>&#34;</span>antialias<span style=color:#960050;background-color:#1e0010>&#34;</span>, <span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  let easyCamState <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    distance<span style=color:#f92672>:</span> <span style=color:#ae81ff>325</span>,
+</span></span><span style=display:flex><span>    center<span style=color:#f92672>:</span> [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>    rotation<span style=color:#f92672>:</span> [<span style=color:#ae81ff>0.25</span>, <span style=color:#ae81ff>0.25</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>],
 </span></span><span style=display:flex><span>  };
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>easycam</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Dw</span>.<span style=color:#a6e22e>EasyCam</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>_renderer</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>easycam</span>.<span style=color:#a6e22e>state_reset</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>easyCamState</span>;
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>easycam</span>.<span style=color:#a6e22e>setState</span>(<span style=color:#a6e22e>easyCamState</span>, <span style=color:#ae81ff>2000</span>);
-</span></span><span style=display:flex><span>  document.<span style=color:#a6e22e>oncontextmenu</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span> () {
+</span></span><span style=display:flex><span>  easycam <span style=color:#f92672>=</span> new Dw.EasyCam(<span style=color:#66d9ef>this</span>._renderer);
+</span></span><span style=display:flex><span>  easycam.state_reset <span style=color:#f92672>=</span> easyCamState;
+</span></span><span style=display:flex><span>  easycam.setState(easyCamState, <span style=color:#ae81ff>2000</span>);
+</span></span><span style=display:flex><span>  document.oncontextmenu <span style=color:#f92672>=</span> function () {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
 </span></span><span style=display:flex><span>  };
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>maxPos</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>;
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>objects</span> <span style=color:#f92672>=</span> [];
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>40</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>objects</span>.<span style=color:#a6e22e>push</span>({
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>position</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>createVector</span>(
-</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>maxPos</span>,
-</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>maxPos</span>,
-</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>maxPos</span>
+</span></span><span style=display:flex><span>  let maxPos <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>  objects <span style=color:#f92672>=</span> [];
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (let i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>40</span>; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    objects.push({
+</span></span><span style=display:flex><span>      position<span style=color:#f92672>:</span> createVector(
+</span></span><span style=display:flex><span>        (random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> maxPos,
+</span></span><span style=display:flex><span>        (random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> maxPos,
+</span></span><span style=display:flex><span>        (random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> maxPos
 </span></span><span style=display:flex><span>      ),
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>size</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>30</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>10</span>,
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>color</span>(<span style=color:#a6e22e>random</span>(), <span style=color:#a6e22e>random</span>(), <span style=color:#a6e22e>random</span>()),
+</span></span><span style=display:flex><span>      size<span style=color:#f92672>:</span> random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>30</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>10</span>,
+</span></span><span style=display:flex><span>      color<span style=color:#f92672>:</span> color(random(), random(), random()),
 </span></span><span style=display:flex><span>    });
 </span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ambient</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlider</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.05</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ambient</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>10</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ambient</span>.<span style=color:#a6e22e>input</span>(() =&gt; {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(<span style=color:#e6db74>&#34;ambient&#34;</span>, <span style=color:#a6e22e>ambient</span>.<span style=color:#a6e22e>value</span>());
+</span></span><span style=display:flex><span>  ambient <span style=color:#f92672>=</span> createSlider(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.05</span>);
+</span></span><span style=display:flex><span>  ambient.position(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>10</span>);
+</span></span><span style=display:flex><span>  ambient.<span style=color:#66d9ef>input</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    specularShader.setUniform(<span style=color:#960050;background-color:#1e0010>&#34;</span>ambient<span style=color:#960050;background-color:#1e0010>&#34;</span>, ambient.value());
 </span></span><span style=display:flex><span>  });
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>shader</span>(<span style=color:#a6e22e>lightShader</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(<span style=color:#e6db74>&#34;ambient&#34;</span>, <span style=color:#a6e22e>ambient</span>.<span style=color:#a6e22e>value</span>());
+</span></span><span style=display:flex><span>  shader(specularShader);
+</span></span><span style=display:flex><span>  specularShader.setUniform(<span style=color:#960050;background-color:#1e0010>&#34;</span>ambient<span style=color:#960050;background-color:#1e0010>&#34;</span>, ambient.value());
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>0</span>);
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>pointLight</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>getPointLight</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>resetShader</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>push</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>stroke</span>(<span style=color:#e6db74>&#34;green&#34;</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>axes</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>grid</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>push</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>translate</span>(<span style=color:#a6e22e>pointLight</span>.<span style=color:#a6e22e>position</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>noStroke</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>fill</span>(<span style=color:#e6db74>&#34;white&#34;</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>sphere</span>(<span style=color:#ae81ff>3</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span>();
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>shader</span>(<span style=color:#a6e22e>lightShader</span>);
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(
-</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;uLightPosition&#34;</span>,
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>treeLocation</span>(<span style=color:#a6e22e>pointLight</span>.<span style=color:#a6e22e>position</span>, {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>from</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>WORLD</span>,
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>to</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>EYE</span>,
-</span></span><span style=display:flex><span>    }).<span style=color:#a6e22e>array</span>()
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>  let pointLight <span style=color:#f92672>=</span> getPointLight();
+</span></span><span style=display:flex><span>  resetShader();
+</span></span><span style=display:flex><span>  push();
+</span></span><span style=display:flex><span>  stroke(<span style=color:#960050;background-color:#1e0010>&#34;</span>green<span style=color:#960050;background-color:#1e0010>&#34;</span>);
+</span></span><span style=display:flex><span>  axes();
+</span></span><span style=display:flex><span>  grid();
+</span></span><span style=display:flex><span>  pop();
+</span></span><span style=display:flex><span>  push();
+</span></span><span style=display:flex><span>  translate(pointLight.position);
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  fill(<span style=color:#960050;background-color:#1e0010>&#34;</span>white<span style=color:#960050;background-color:#1e0010>&#34;</span>);
+</span></span><span style=display:flex><span>  sphere(<span style=color:#ae81ff>3</span>);
+</span></span><span style=display:flex><span>  pop();
+</span></span><span style=display:flex><span>  shader(specularShader);
+</span></span><span style=display:flex><span>  specularShader.setUniform(
+</span></span><span style=display:flex><span>    <span style=color:#960050;background-color:#1e0010>&#34;</span>uLightPosition<span style=color:#960050;background-color:#1e0010>&#34;</span>,
+</span></span><span style=display:flex><span>    treeLocation(pointLight.position, {
+</span></span><span style=display:flex><span>      from<span style=color:#f92672>:</span> Tree.WORLD,
+</span></span><span style=display:flex><span>      to<span style=color:#f92672>:</span> Tree.EYE,
+</span></span><span style=display:flex><span>    }).array()
 </span></span><span style=display:flex><span>  );
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>objects</span>.<span style=color:#a6e22e>length</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>push</span>();
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>noStroke</span>();
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fill</span>(<span style=color:#a6e22e>objects</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>color</span>);
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span>(<span style=color:#a6e22e>objects</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>position</span>);
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>size</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>objects</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>size</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>;
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>i</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>box</span>(<span style=color:#a6e22e>size</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
-</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>i</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>sphere</span>(<span style=color:#a6e22e>size</span>);
-</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>i</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>) {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>torus</span>(<span style=color:#a6e22e>size</span>, <span style=color:#a6e22e>size</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>);
-</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>i</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>) {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>cylinder</span>(<span style=color:#a6e22e>size</span>, <span style=color:#a6e22e>size</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (let i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> objects.length; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    push();
+</span></span><span style=display:flex><span>    noStroke();
+</span></span><span style=display:flex><span>    fill(objects[i].color);
+</span></span><span style=display:flex><span>    translate(objects[i].position);
+</span></span><span style=display:flex><span>    let size <span style=color:#f92672>=</span> objects[i].size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>      box(size <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
+</span></span><span style=display:flex><span>      sphere(size);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>) {
+</span></span><span style=display:flex><span>      torus(size, size <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>) {
+</span></span><span style=display:flex><span>      cylinder(size, size <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
 </span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>      <span style=color:#a6e22e>cone</span>(<span style=color:#a6e22e>size</span>, <span style=color:#a6e22e>size</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>      cone(size, size <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
 </span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>pop</span>();
+</span></span><span style=display:flex><span>    pop();
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getPointLight</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>angle</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>frameCount</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.03</span>;
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>rad</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>;
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>px</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>cos</span>(<span style=color:#a6e22e>angle</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>rad</span>;
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>py</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>sin</span>(<span style=color:#a6e22e>angle</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>rad</span>;
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>r</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>sin</span>(<span style=color:#a6e22e>angle</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.5</span>;
+</span></span><span style=display:flex><span>function getPointLight() {
+</span></span><span style=display:flex><span>  let angle <span style=color:#f92672>=</span> frameCount <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.03</span>;
+</span></span><span style=display:flex><span>  let rad <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>;
+</span></span><span style=display:flex><span>  let px <span style=color:#f92672>=</span> cos(angle) <span style=color:#f92672>*</span> rad;
+</span></span><span style=display:flex><span>  let py <span style=color:#f92672>=</span> sin(angle) <span style=color:#f92672>*</span> rad;
+</span></span><span style=display:flex><span>  let r <span style=color:#f92672>=</span> sin(angle) <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.5</span>;
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>position</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>createVector</span>(<span style=color:#a6e22e>px</span>, <span style=color:#a6e22e>py</span>, <span style=color:#ae81ff>0</span>),
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>color</span>(<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> <span style=color:#a6e22e>r</span>, <span style=color:#a6e22e>r</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>, <span style=color:#a6e22e>r</span>),
+</span></span><span style=display:flex><span>    position<span style=color:#f92672>:</span> createVector(px, py, <span style=color:#ae81ff>0</span>),
+</span></span><span style=display:flex><span>    color<span style=color:#f92672>:</span> color(<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> r, r <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>, r),
 </span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Specular reflection Shader</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#a6e22e>precision</span> <span style=color:#a6e22e>mediump</span> <span style=color:#66d9ef>float</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>ambient</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#a6e22e>vec4</span> <span style=color:#a6e22e>uMaterialColor</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>uLightPosition</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>varying</span> <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>normal3</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>varying</span> <span style=color:#a6e22e>vec4</span> <span style=color:#a6e22e>position4</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>direction3</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>uLightPosition</span> <span style=color:#f92672>-</span> <span style=color:#a6e22e>position4</span>.<span style=color:#a6e22e>xyz</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>reflected3</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>reflect</span>(<span style=color:#f92672>-</span><span style=color:#a6e22e>direction3</span>, <span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>normal3</span>));
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>camera3</span> <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#a6e22e>position4</span>.<span style=color:#a6e22e>xyz</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>specular</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0.0</span>, <span style=color:#a6e22e>dot</span>(<span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>reflected3</span>), <span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>camera3</span>)));
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>gl_FragColor</span> <span style=color:#f92672>=</span> (<span style=color:#a6e22e>ambient</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>specular</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>uMaterialColor</span>;
 </span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><h2 id=visualization-2>Visualization
 <a class=anchor href=#visualization-2>#</a></h2><iframe id=specularReflection style=width:625px;height:625px srcdoc="
         <!DOCTYPE html>
@@ -368,5 +403,176 @@
           <body>
           </body>
         </html>
-      "></iframe></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/49993d14f6ccd2e23b7f489098c10db1735da613 title='Last modified by Jaider Andrés Pinto Pinto | November 28, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
-<span>November 28, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li><li><a href=#toon-shading>Toon shading</a><ul><li><a href=#code-1>Code</a></li><li><a href=#visualization-1>Visualization</a></li></ul></li><li><a href=#specular-reflection>Specular reflection</a><ul><li><a href=#code-2>Code</a></li><li><a href=#visualization-2>Visualization</a></li></ul></li></ul></nav></div></aside></main></body></html>
+      "></iframe><h1 id=mixed-lighting>Mixed lighting
+<a class=anchor href=#mixed-lighting>#</a></h1><h2 id=code-3>Code
+<a class=anchor href=#code-3>#</a></h2><details><summary>Mixed lighting</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-glsl data-lang=glsl><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>&#34;</span>use strict<span style=color:#960050;background-color:#1e0010>&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>let easycam;
+</span></span><span style=display:flex><span>let objects;
+</span></span><span style=display:flex><span>let mixShader;
+</span></span><span style=display:flex><span>let ambient;
+</span></span><span style=display:flex><span>let ambient4;
+</span></span><span style=display:flex><span>function preload() {
+</span></span><span style=display:flex><span>  mixShader <span style=color:#f92672>=</span> readShader(<span style=color:#960050;background-color:#1e0010>&#34;</span><span style=color:#f92672>/</span>Talleres<span style=color:#f92672>/</span>sketches<span style=color:#f92672>/</span>shaders<span style=color:#f92672>/</span>lighting<span style=color:#f92672>/</span>mix.frag<span style=color:#960050;background-color:#1e0010>&#34;</span>, {
+</span></span><span style=display:flex><span>    varyings<span style=color:#f92672>:</span> Tree.normal3 <span style=color:#f92672>|</span> Tree.position4,
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function setup() {
+</span></span><span style=display:flex><span>  createCanvas(<span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>600</span>, WEBGL);
+</span></span><span style=display:flex><span>  noLights();
+</span></span><span style=display:flex><span>  colorMode(RGB, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>  setAttributes(<span style=color:#960050;background-color:#1e0010>&#34;</span>antialias<span style=color:#960050;background-color:#1e0010>&#34;</span>, <span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  let easyCamState <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    distance<span style=color:#f92672>:</span> <span style=color:#ae81ff>325</span>,
+</span></span><span style=display:flex><span>    center<span style=color:#f92672>:</span> [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>    rotation<span style=color:#f92672>:</span> [<span style=color:#ae81ff>0.25</span>, <span style=color:#ae81ff>0.25</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>],
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>  easycam <span style=color:#f92672>=</span> new Dw.EasyCam(<span style=color:#66d9ef>this</span>._renderer);
+</span></span><span style=display:flex><span>  easycam.state_reset <span style=color:#f92672>=</span> easyCamState;
+</span></span><span style=display:flex><span>  easycam.setState(easyCamState, <span style=color:#ae81ff>2000</span>);
+</span></span><span style=display:flex><span>  document.oncontextmenu <span style=color:#f92672>=</span> function () {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>  let maxPos <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>  objects <span style=color:#f92672>=</span> [];
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (let i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>40</span>; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    objects.push({
+</span></span><span style=display:flex><span>      position<span style=color:#f92672>:</span> createVector(
+</span></span><span style=display:flex><span>        (random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> maxPos,
+</span></span><span style=display:flex><span>        (random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> maxPos,
+</span></span><span style=display:flex><span>        (random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> maxPos
+</span></span><span style=display:flex><span>      ),
+</span></span><span style=display:flex><span>      angle<span style=color:#f92672>:</span> random(<span style=color:#ae81ff>0</span>, TWO_PI),
+</span></span><span style=display:flex><span>      axis<span style=color:#f92672>:</span> p5.Vector.random3D(),
+</span></span><span style=display:flex><span>      size<span style=color:#f92672>:</span> random() <span style=color:#f92672>*</span> <span style=color:#ae81ff>30</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>10</span>,
+</span></span><span style=display:flex><span>      color<span style=color:#f92672>:</span> color(random(), random(), random()),
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  shader(mixShader);
+</span></span><span style=display:flex><span>  ambient <span style=color:#f92672>=</span> createSlider(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.05</span>);
+</span></span><span style=display:flex><span>  ambient.position(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>10</span>);
+</span></span><span style=display:flex><span>  ambient.<span style=color:#66d9ef>input</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    mixShader.setUniform(<span style=color:#960050;background-color:#1e0010>&#34;</span>ambient<span style=color:#960050;background-color:#1e0010>&#34;</span>, ambient.value());
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>  ambient4 <span style=color:#f92672>=</span> createColorPicker(<span style=color:#960050;background-color:#1e0010>&#34;</span>white<span style=color:#960050;background-color:#1e0010>&#34;</span>);
+</span></span><span style=display:flex><span>  ambient4.style(<span style=color:#960050;background-color:#1e0010>&#34;</span>width<span style=color:#960050;background-color:#1e0010>&#34;</span>, <span style=color:#960050;background-color:#1e0010>&#34;</span><span style=color:#ae81ff>60</span>px<span style=color:#960050;background-color:#1e0010>&#34;</span>);
+</span></span><span style=display:flex><span>  ambient4.position(<span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>45</span>);
+</span></span><span style=display:flex><span>  ambient4.<span style=color:#66d9ef>input</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    let ambient4Color <span style=color:#f92672>=</span> ambient4.color();
+</span></span><span style=display:flex><span>    mixShader.setUniform(<span style=color:#960050;background-color:#1e0010>&#34;</span>ambient4<span style=color:#960050;background-color:#1e0010>&#34;</span>, [
+</span></span><span style=display:flex><span>      red(ambient4Color) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255</span>,
+</span></span><span style=display:flex><span>      green(ambient4Color) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255</span>,
+</span></span><span style=display:flex><span>      blue(ambient4Color) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255</span>,
+</span></span><span style=display:flex><span>      <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    ]);
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>  mixShader.setUniform(<span style=color:#960050;background-color:#1e0010>&#34;</span>ambient4<span style=color:#960050;background-color:#1e0010>&#34;</span>, [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>]);
+</span></span><span style=display:flex><span>  mixShader.setUniform(<span style=color:#960050;background-color:#1e0010>&#34;</span>ambient<span style=color:#960050;background-color:#1e0010>&#34;</span>, ambient.value());
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function draw() {
+</span></span><span style=display:flex><span>  background(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>  let pointLight <span style=color:#f92672>=</span> getPointLight();
+</span></span><span style=display:flex><span>  resetShader();
+</span></span><span style=display:flex><span>  let dirX <span style=color:#f92672>=</span> (mouseX <span style=color:#f92672>/</span> width <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.5</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>  let dirY <span style=color:#f92672>=</span> (mouseY <span style=color:#f92672>/</span> height <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.5</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>  mixShader.setUniform(
+</span></span><span style=display:flex><span>    <span style=color:#960050;background-color:#1e0010>&#34;</span>lightNormal<span style=color:#960050;background-color:#1e0010>&#34;</span>,
+</span></span><span style=display:flex><span>    createVector(<span style=color:#f92672>-</span>dirX, <span style=color:#f92672>-</span>dirY, ambient.value()).array()
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  push();
+</span></span><span style=display:flex><span>  stroke(<span style=color:#960050;background-color:#1e0010>&#34;</span>green<span style=color:#960050;background-color:#1e0010>&#34;</span>);
+</span></span><span style=display:flex><span>  axes();
+</span></span><span style=display:flex><span>  grid();
+</span></span><span style=display:flex><span>  pop();
+</span></span><span style=display:flex><span>  push();
+</span></span><span style=display:flex><span>  translate(pointLight.position);
+</span></span><span style=display:flex><span>  noStroke();
+</span></span><span style=display:flex><span>  fill(<span style=color:#960050;background-color:#1e0010>&#34;</span>white<span style=color:#960050;background-color:#1e0010>&#34;</span>);
+</span></span><span style=display:flex><span>  sphere(<span style=color:#ae81ff>3</span>);
+</span></span><span style=display:flex><span>  pop();
+</span></span><span style=display:flex><span>  shader(mixShader);
+</span></span><span style=display:flex><span>  mixShader.setUniform(
+</span></span><span style=display:flex><span>    <span style=color:#960050;background-color:#1e0010>&#34;</span>uLightPosition<span style=color:#960050;background-color:#1e0010>&#34;</span>,
+</span></span><span style=display:flex><span>    treeLocation(pointLight.position, {
+</span></span><span style=display:flex><span>      from<span style=color:#f92672>:</span> Tree.WORLD,
+</span></span><span style=display:flex><span>      to<span style=color:#f92672>:</span> Tree.EYE,
+</span></span><span style=display:flex><span>    }).array()
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (let i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> objects.length; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    push();
+</span></span><span style=display:flex><span>    noStroke();
+</span></span><span style=display:flex><span>    fill(objects[i].color);
+</span></span><span style=display:flex><span>    translate(objects[i].position);
+</span></span><span style=display:flex><span>    rotate(objects[i].angle, objects[i].axis);
+</span></span><span style=display:flex><span>    let size <span style=color:#f92672>=</span> objects[i].size <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>      box(size <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
+</span></span><span style=display:flex><span>      sphere(size);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>) {
+</span></span><span style=display:flex><span>      torus(size, size <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (i <span style=color:#f92672>%</span> <span style=color:#ae81ff>5</span> <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>) {
+</span></span><span style=display:flex><span>      cylinder(size, size <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>      cone(size, size <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    pop();
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>function getPointLight() {
+</span></span><span style=display:flex><span>  let angle <span style=color:#f92672>=</span> frameCount <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.03</span>;
+</span></span><span style=display:flex><span>  let rad <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>;
+</span></span><span style=display:flex><span>  let px <span style=color:#f92672>=</span> cos(angle) <span style=color:#f92672>*</span> rad;
+</span></span><span style=display:flex><span>  let py <span style=color:#f92672>=</span> sin(angle) <span style=color:#f92672>*</span> rad;
+</span></span><span style=display:flex><span>  let r <span style=color:#f92672>=</span> sin(angle) <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.5</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>    position<span style=color:#f92672>:</span> createVector(px, py, <span style=color:#ae81ff>0</span>),
+</span></span><span style=display:flex><span>    color<span style=color:#f92672>:</span> color(<span style=color:#ae81ff>1</span> <span style=color:#f92672>-</span> r, r <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>, r),
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><details><summary>Mixed lighting Shader</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#a6e22e>precision</span> <span style=color:#a6e22e>mediump</span> <span style=color:#66d9ef>float</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#a6e22e>vec4</span>  <span style=color:#a6e22e>ambient4</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#a6e22e>vec4</span> <span style=color:#a6e22e>uMaterialColor</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>lightNormal</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>uLightPosition</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>uniform</span> <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>ambient</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>varying</span> <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>normal3</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>varying</span> <span style=color:#a6e22e>vec4</span> <span style=color:#a6e22e>position4</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>direction3</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>uLightPosition</span> <span style=color:#f92672>-</span> <span style=color:#a6e22e>position4</span>.<span style=color:#a6e22e>xyz</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>d</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>length</span>( <span style=color:#a6e22e>direction3</span> );
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>attenuation</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>clamp</span>( <span style=color:#ae81ff>10.0</span> <span style=color:#f92672>/</span> <span style=color:#a6e22e>d</span>, <span style=color:#ae81ff>0.0</span>, <span style=color:#ae81ff>1.0</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>reflected3</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>reflect</span>(<span style=color:#f92672>-</span><span style=color:#a6e22e>direction3</span>, <span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>normal3</span>));
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>vec3</span> <span style=color:#a6e22e>camera3</span> <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#a6e22e>position4</span>.<span style=color:#a6e22e>xyz</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>specular</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0.0</span>, <span style=color:#a6e22e>dot</span>(<span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>reflected3</span>), <span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>camera3</span>))) <span style=color:#f92672>*</span> <span style=color:#a6e22e>attenuation</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0.0</span>, <span style=color:#a6e22e>dot</span>(<span style=color:#a6e22e>normalize</span>(<span style=color:#f92672>-</span><span style=color:#a6e22e>lightNormal</span>), <span style=color:#a6e22e>normalize</span>(<span style=color:#a6e22e>normal3</span>))) ;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>float</span> <span style=color:#a6e22e>k</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.95</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>1.0</span> <span style=color:#f92672>:</span> <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>0.6</span> <span style=color:#f92672>:</span> <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.25</span> <span style=color:#f92672>?</span> <span style=color:#ae81ff>0.4</span> <span style=color:#f92672>:</span> <span style=color:#ae81ff>0.2</span>    ;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>gl_FragColor</span> <span style=color:#f92672>=</span> ( <span style=color:#a6e22e>ambient4</span>  <span style=color:#f92672>*</span> (<span style=color:#a6e22e>ambient</span>  <span style=color:#f92672>+</span> <span style=color:#a6e22e>k</span>  <span style=color:#f92672>+</span> <span style=color:#a6e22e>specular</span> )) <span style=color:#f92672>*</span> <span style=color:#a6e22e>uMaterialColor</span>;
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><h2 id=visualization-3>Visualization
+<a class=anchor href=#visualization-3>#</a></h2><iframe id=mixShading style=width:625px;height:625px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js></script>
+            <script src=https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js></script>
+            <script src=https://freshfork.github.io/p5.EasyCam/p5.easycam.js></script>
+            
+            
+            
+            
+            
+            <script src=/Talleres/sketches/shaders/lighting/mixShading.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe><h2 id=conclusions>Conclusions
+<a class=anchor href=#conclusions>#</a></h2></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/a381bf0c9ad3ae5c7558185df4067cd4fc9c3bc3 title='Last modified by Jaider Andrés Pinto Pinto | November 28, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
+<span>November 28, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li><li><a href=#toon-shading>Toon shading</a><ul><li><a href=#code-1>Code</a></li><li><a href=#visualization-1>Visualization</a></li></ul></li><li><a href=#specular-reflection>Specular reflection</a><ul><li><a href=#code-2>Code</a></li><li><a href=#visualization-2>Visualization</a></li></ul></li><li><a href=#mixed-lighting>Mixed lighting</a><ul><li><a href=#code-3>Code</a></li><li><a href=#visualization-3>Visualization</a></li><li><a href=#conclusions>Conclusions</a></li></ul></li></ul></nav></div></aside></main></body></html>
