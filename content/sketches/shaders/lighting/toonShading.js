@@ -1,23 +1,22 @@
+"use strict";
+
 let easycam;
 let models;
 let modelsDisplayed;
 let lightShader;
-let ambient, ambient4;
+let depth, ambient4;
 
 function preload() {
-  lightShader = readShader(
-    "/Talleres/sketches/shaders/lighting/ambient_color.frag",
-    {
-      varyings: Tree.NONE,
-    }
-  );
+  lightShader = readShader("/Talleres/sketches/shaders/lighting/toon.frag", {
+    varyings: Tree.normal3,
+  });
 }
 
 function setup() {
   createCanvas(600, 600, WEBGL);
+  colorMode(RGB, 1);
   textureMode(NORMAL);
   noStroke();
-  //console.log(camera);
   setAttributes("antialias", true);
   // define initial state
   let state = {
@@ -34,7 +33,6 @@ function setup() {
   document.oncontextmenu = function () {
     return false;
   };
-  colorMode(RGB, 1);
   let trange = 100;
   models = [];
   for (let i = 0; i < 100; i++) {
@@ -44,23 +42,21 @@ function setup() {
         (random() * 2 - 1) * trange,
         (random() * 2 - 1) * trange
       ),
+      angle: random(0, TWO_PI),
+      axis: p5.Vector.random3D(),
       size: random() * 25 + 8,
       color: color(random(), random(), random()),
     });
   }
-  //emitResolution(lightShader);
   // gui
   modelsDisplayed = createSlider(1, models.length, int(models.length / 4), 1);
   modelsDisplayed.position(10, 10);
   modelsDisplayed.style("width", "80px");
-  ambient = createSlider(0, 1, 0.5, 0.05);
-  ambient.position(420, 10);
-  ambient.style("width", "80px");
-  ambient.input(() => {
-    lightShader.setUniform("ambient", ambient.value());
-  });
+  depth = createSlider(-1, 1, -0.4, 0.05);
+  depth.position(420, 10);
+  depth.style("width", "80px");
   shader(lightShader);
-  lightShader.setUniform("ambient", ambient.value());
+  lightShader.setUniform("ambient", depth.value());
   ambient4 = createColorPicker("white");
   ambient4.position(420, 45);
   ambient4.input(() => {
@@ -87,6 +83,14 @@ function setup() {
 
 function draw() {
   background(0);
+  let dirX = (mouseX / width - 0.5) * 2;
+  let dirY = (mouseY / height - 0.5) * 2;
+  lightShader.setUniform(
+    "lightNormal",
+    createVector(-dirX, -dirY, depth.value()).array()
+  );
+  //lightShader.setUniform('lightNormal', createVector(-dirX, -dirY, depth.value()).normalize().array());
+  //lightShader.setUniform('lightNormal', treeDisplacement([-1, 0, 0], { from: Tree.WORLD, to: Tree.EYE }).array());
   push();
   stroke("green");
   axes();
@@ -96,9 +100,10 @@ function draw() {
     push();
     fill(models[i].color);
     translate(models[i].position);
+    rotate(models[i].angle, models[i].axis);
     let radius = models[i].size / 2;
     i % 3 === 0
-      ? box(radius * 2)
+      ? cone(radius)
       : i % 3 === 1
       ? sphere(radius)
       : torus(radius, radius / 4);

@@ -9,10 +9,10 @@ let p = 0;
 
 function preload() {
   for (i = 0; i < 30; i++) {
-    let imgNew = loadImage(`/Talleres/sketches/sheders/assets/i${i + 1}.jpg`);
+    let imgNew = loadImage(`/Talleres/sketches/shaders/assets/i${i + 1}.jpg`);
     imgs.push(imgNew);
   }
-  img = loadImage(`/Talleres/sketches/sheders/assets/i${p + 1}.jpg`);
+  img = loadImage(`/Talleres/sketches/shaders/assets/i${p + 1}.jpg`);
 }
 
 function setup() {
