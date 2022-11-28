@@ -1,5 +1,5 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Colored Ambient Light # Code # Colored Ambient Light let easycam; let models; let modelsDisplayed; let lightShader; let ambient, ambient4; function preload() { lightShader = readShader(&#34;/sketches/shaders/lighting/ambient_color.frag&#34;, { varyings: Tree.NONE, }); } function setup() { createCanvas(500, 500, WEBGL); textureMode(NORMAL); noStroke(); //console.log(camera); setAttributes(&#34;antialias&#34;, true); // define initial state let state = { distance: 300, center: [0, 0, 0], rotation: [-0.285, -0.257, -0.619, 0.685], }; console.log(Dw.EasyCam.INFO); easycam = new Dw.EasyCam(this._renderer); //easycam.attachMouseListeners(this._renderer); easycam.state_reset = state; // state to use on reset (double-click/tap) easycam."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Lighting/"><title>Lighting | Visual Computing</title><link rel=manifest href=/Talleres/manifest.json><link rel=icon href=/Talleres/favicon.png type=image/x-icon><link rel=stylesheet href=/Talleres/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/Talleres/flexsearch.min.js></script>
-<script defer src=/Talleres/en.search.min.5bccd71fde2211452e77610c20402c2f7c1d44cfbbbe7549f8c8412c8b47e593.js integrity="sha256-W8zXH94iEUUud2EMIEAsL3wdRM+7vnVJ+MhBLItH5ZM=" crossorigin=anonymous></script>
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Colored Ambient Light # Code # Colored Ambient Light let easycam; let models; let modelsDisplayed; let lightShader; let ambient, ambient4; function preload() { lightShader = readShader( &#34;/Talleres/sketches/shaders/lighting/ambient_color.frag&#34;, { varyings: Tree.NONE, } ); } function setup() { createCanvas(600, 600, WEBGL); textureMode(NORMAL); noStroke(); //console.log(camera); setAttributes(&#34;antialias&#34;, true); // define initial state let state = { distance: 300, center: [0, 0, 0], rotation: [-0.285, -0.257, -0.619, 0.685], }; console.log(Dw.EasyCam.INFO); easycam = new Dw.EasyCam(this._renderer); //easycam."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Lighting/"><title>Lighting | Visual Computing</title><link rel=manifest href=/Talleres/manifest.json><link rel=icon href=/Talleres/favicon.png type=image/x-icon><link rel=stylesheet href=/Talleres/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/Talleres/flexsearch.min.js></script>
+<script defer src=/Talleres/en.search.min.6ee2c472ffc1a704529f86ac777ff5d029356e050931e7ac7042ee52bfe499c8.js integrity="sha256-buLEcv/BpwRSn4asd3/10Ck1bgUJMeescELuUr/kmcg=" crossorigin=anonymous></script>
 <link rel=alternate type=application/rss+xml href=https://visual-computing-2022-2.github.io/Talleres/docs/Workshop/Shaders/Lighting/index.xml title="Visual Computing"></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/Talleres/><span>Visual Computing</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li class=book-section-flat><a href=/Talleres/docs/Workshop/>Workshop</a><ul><li><input type=checkbox id=section-890fdf72107ced932b57ba979e798b88 class=toggle checked>
 <label for=section-890fdf72107ced932b57ba979e798b88 class="flex justify-between"><a role=button>Shaders</a></label><ul><li><a href=/Talleres/docs/Workshop/Shaders/Coloring/>Coloring</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Image_Processing/>Image Processing</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Lighting/ class=active>Lighting</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Photomosaic/>Photomosaic</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Spatial_Coherence/>Spatial Coherence</a><ul></ul></li><li><a href=/Talleres/docs/Workshop/Shaders/Textures/>Textures</a><ul></ul></li></ul></li><li><input type=checkbox id=section-8d2b6a08245086db5d9347a14c60b971 class=toggle>
@@ -9,7 +9,7 @@
 <label for=section-673b9b4bfd505a1d2632f367f1a8e21b class="flex justify-between"><a href=/Talleres/docs/Workshop/workshop_2/practice/>Practice</a></label><ul></ul></li><li><input type=checkbox id=section-a1f74c2d4e02c95786884d1e3422628e class=toggle>
 <label for=section-a1f74c2d4e02c95786884d1e3422628e class="flex justify-between"><a role=button>Rasterization</a></label><ul><li><a href=/Talleres/docs/Workshop/workshop_2/rasterization/colorShading/>Color Shading</a></li><li><a href=/Talleres/docs/Workshop/workshop_2/rasterization/textureMapping/>Texture Mapping</a></li></ul></li><li><a href=/Talleres/docs/Workshop/workshop_2/tetris/>Tetris</a><ul></ul></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/Talleres/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>Lighting</strong>
-<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=colored-ambient-light>Colored Ambient Light
+<label for=toc-control><img src=/Talleres/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li><li><a href=#toon-shading>Toon shading</a><ul><li><a href=#code-1>Code</a></li><li><a href=#visualization-1>Visualization</a></li></ul></li></ul></nav></aside></header><article class=markdown><h1 id=colored-ambient-light>Colored Ambient Light
 <a class=anchor href=#colored-ambient-light>#</a></h1><h2 id=code>Code
 <a class=anchor href=#code>#</a></h2><details><summary>Colored Ambient Light</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>easycam</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>models</span>;
@@ -18,13 +18,16 @@
 </span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>ambient</span>, <span style=color:#a6e22e>ambient4</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>preload</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>readShader</span>(<span style=color:#e6db74>&#34;/sketches/shaders/lighting/ambient_color.frag&#34;</span>, {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>varyings</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>NONE</span>,
-</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>readShader</span>(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;/Talleres/sketches/shaders/lighting/ambient_color.frag&#34;</span>,
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>varyings</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>NONE</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  );
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>500</span>, <span style=color:#ae81ff>500</span>, <span style=color:#a6e22e>WEBGL</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>600</span>, <span style=color:#a6e22e>WEBGL</span>);
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>textureMode</span>(<span style=color:#a6e22e>NORMAL</span>);
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>noStroke</span>();
 </span></span><span style=display:flex><span>  <span style=color:#75715e>//console.log(camera);
@@ -133,5 +136,137 @@
           <body>
           </body>
         </html>
-      "></iframe></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/5ee3995a7762901637d07788637f5c8e8a0cf812 title='Last modified by JaiderPinto | November 28, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
-<span>November 28, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li></ul></nav></div></aside></main></body></html>
+      "></iframe><h1 id=toon-shading>Toon shading
+<a class=anchor href=#toon-shading>#</a></h1><h2 id=code-1>Code
+<a class=anchor href=#code-1>#</a></h2><details><summary>Toon shading</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#e6db74>&#34;use strict&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>easycam</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>models</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>modelsDisplayed</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>lightShader</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>depth</span>, <span style=color:#a6e22e>ambient4</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>preload</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>readShader</span>(<span style=color:#e6db74>&#34;/Talleres/sketches/shaders/lighting/toon.frag&#34;</span>, {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>varyings</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Tree</span>.<span style=color:#a6e22e>normal3</span>,
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>600</span>, <span style=color:#a6e22e>WEBGL</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>colorMode</span>(<span style=color:#a6e22e>RGB</span>, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>textureMode</span>(<span style=color:#a6e22e>NORMAL</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>noStroke</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>setAttributes</span>(<span style=color:#e6db74>&#34;antialias&#34;</span>, <span style=color:#66d9ef>true</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// define initial state
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>distance</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>300</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>center</span><span style=color:#f92672>:</span> [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>],
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotation</span><span style=color:#f92672>:</span> [<span style=color:#f92672>-</span><span style=color:#ae81ff>0.285</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>0.257</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>0.619</span>, <span style=color:#ae81ff>0.685</span>],
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>Dw</span>.<span style=color:#a6e22e>EasyCam</span>.<span style=color:#a6e22e>INFO</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>easycam</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Dw</span>.<span style=color:#a6e22e>EasyCam</span>(<span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>_renderer</span>);
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//easycam.attachMouseListeners(this._renderer);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#a6e22e>easycam</span>.<span style=color:#a6e22e>state_reset</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>state</span>; <span style=color:#75715e>// state to use on reset (double-click/tap)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#a6e22e>easycam</span>.<span style=color:#a6e22e>setState</span>(<span style=color:#a6e22e>state</span>, <span style=color:#ae81ff>2000</span>); <span style=color:#75715e>// now animate to that state
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>// suppress right-click context menu
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  document.<span style=color:#a6e22e>oncontextmenu</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span> () {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>  };
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>trange</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>models</span> <span style=color:#f92672>=</span> [];
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>100</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>models</span>.<span style=color:#a6e22e>push</span>({
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>position</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>createVector</span>(
+</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>trange</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>trange</span>,
+</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> <span style=color:#a6e22e>trange</span>
+</span></span><span style=display:flex><span>      ),
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>angle</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>random</span>(<span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>TWO_PI</span>),
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>axis</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>p5</span>.<span style=color:#a6e22e>Vector</span>.<span style=color:#a6e22e>random3D</span>(),
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>size</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>random</span>() <span style=color:#f92672>*</span> <span style=color:#ae81ff>25</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>8</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>color</span>(<span style=color:#a6e22e>random</span>(), <span style=color:#a6e22e>random</span>(), <span style=color:#a6e22e>random</span>()),
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// gui
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#a6e22e>modelsDisplayed</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlider</span>(<span style=color:#ae81ff>1</span>, <span style=color:#a6e22e>models</span>.<span style=color:#a6e22e>length</span>, <span style=color:#66d9ef>int</span>(<span style=color:#a6e22e>models</span>.<span style=color:#a6e22e>length</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>), <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>modelsDisplayed</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>modelsDisplayed</span>.<span style=color:#a6e22e>style</span>(<span style=color:#e6db74>&#34;width&#34;</span>, <span style=color:#e6db74>&#34;80px&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>depth</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlider</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>0.4</span>, <span style=color:#ae81ff>0.05</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>depth</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>420</span>, <span style=color:#ae81ff>10</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>depth</span>.<span style=color:#a6e22e>style</span>(<span style=color:#e6db74>&#34;width&#34;</span>, <span style=color:#e6db74>&#34;80px&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>shader</span>(<span style=color:#a6e22e>lightShader</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(<span style=color:#e6db74>&#34;ambient&#34;</span>, <span style=color:#a6e22e>depth</span>.<span style=color:#a6e22e>value</span>());
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ambient4</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createColorPicker</span>(<span style=color:#e6db74>&#34;white&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ambient4</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>420</span>, <span style=color:#ae81ff>45</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>ambient4</span>.<span style=color:#a6e22e>input</span>(() =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    // Prefer to go like this (but seems ambient4.color() always returns values in [0..255]):
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    push();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    colorMode(RGB, 1);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    let ambient4Color = ambient4.color();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    // print(ambient4Color);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    // print(red(ambient4Color), green(ambient4Color), blue(ambient4Color));
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    lightShader.setUniform(&#39;ambient4&#39;, [red(ambient4Color), green(ambient4Color), blue(ambient4Color), 1.0]);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    pop();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>    // */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>ambient4Color</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ambient4</span>.<span style=color:#a6e22e>color</span>();
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(<span style=color:#e6db74>&#34;ambient4&#34;</span>, [
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>red</span>(<span style=color:#a6e22e>ambient4Color</span>) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>green</span>(<span style=color:#a6e22e>ambient4Color</span>) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255</span>,
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>blue</span>(<span style=color:#a6e22e>ambient4Color</span>) <span style=color:#f92672>/</span> <span style=color:#ae81ff>255</span>,
+</span></span><span style=display:flex><span>      <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    ]);
+</span></span><span style=display:flex><span>  });
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(<span style=color:#e6db74>&#34;ambient4&#34;</span>, [<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>]);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>() {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>dirX</span> <span style=color:#f92672>=</span> (<span style=color:#a6e22e>mouseX</span> <span style=color:#f92672>/</span> <span style=color:#a6e22e>width</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.5</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>dirY</span> <span style=color:#f92672>=</span> (<span style=color:#a6e22e>mouseY</span> <span style=color:#f92672>/</span> <span style=color:#a6e22e>height</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.5</span>) <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>lightShader</span>.<span style=color:#a6e22e>setUniform</span>(
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#34;lightNormal&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>createVector</span>(<span style=color:#f92672>-</span><span style=color:#a6e22e>dirX</span>, <span style=color:#f92672>-</span><span style=color:#a6e22e>dirY</span>, <span style=color:#a6e22e>depth</span>.<span style=color:#a6e22e>value</span>()).<span style=color:#a6e22e>array</span>()
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>  <span style=color:#75715e>//lightShader.setUniform(&#39;lightNormal&#39;, createVector(-dirX, -dirY, depth.value()).normalize().array());
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#75715e>//lightShader.setUniform(&#39;lightNormal&#39;, treeDisplacement([-1, 0, 0], { from: Tree.WORLD, to: Tree.EYE }).array());
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#a6e22e>push</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>stroke</span>(<span style=color:#e6db74>&#34;green&#34;</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>axes</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>grid</span>();
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pop</span>();
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>let</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>modelsDisplayed</span>.<span style=color:#a6e22e>value</span>(); <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>push</span>();
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fill</span>(<span style=color:#a6e22e>models</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>color</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span>(<span style=color:#a6e22e>models</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>position</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>rotate</span>(<span style=color:#a6e22e>models</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>angle</span>, <span style=color:#a6e22e>models</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>axis</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>radius</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>models</span>[<span style=color:#a6e22e>i</span>].<span style=color:#a6e22e>size</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>i</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>3</span> <span style=color:#f92672>===</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>?</span> <span style=color:#a6e22e>cone</span>(<span style=color:#a6e22e>radius</span>)
+</span></span><span style=display:flex><span>      <span style=color:#f92672>:</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>%</span> <span style=color:#ae81ff>3</span> <span style=color:#f92672>===</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>?</span> <span style=color:#a6e22e>sphere</span>(<span style=color:#a6e22e>radius</span>)
+</span></span><span style=display:flex><span>      <span style=color:#f92672>:</span> <span style=color:#a6e22e>torus</span>(<span style=color:#a6e22e>radius</span>, <span style=color:#a6e22e>radius</span> <span style=color:#f92672>/</span> <span style=color:#ae81ff>4</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>pop</span>();
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}</span></span></code></pre></div></div></details><h2 id=visualization-1>Visualization
+<a class=anchor href=#visualization-1>#</a></h2><iframe id=toonShading style=width:625px;height:625px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js></script>
+            <script src=https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js></script>
+            <script src=https://freshfork.github.io/p5.EasyCam/p5.easycam.js></script>
+            
+            
+            
+            
+            
+            <script src=/Talleres/sketches/shaders/lighting/toonShading.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/Visual-Computing-2022-2/Talleres/commit/b0526df2873304182bf7a94f45bef20b9616cd1e title='Last modified by JaiderPinto | November 28, 2022' target=_blank rel=noopener><img src=/Talleres/svg/calendar.svg class=book-icon alt=Calendar>
+<span>November 28, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#colored-ambient-light>Colored Ambient Light</a><ul><li><a href=#code>Code</a></li><li><a href=#visualization>Visualization</a></li></ul></li><li><a href=#toon-shading>Toon shading</a><ul><li><a href=#code-1>Code</a></li><li><a href=#visualization-1>Visualization</a></li></ul></li></ul></nav></div></aside></main></body></html>
