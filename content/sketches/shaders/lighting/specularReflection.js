@@ -1,21 +1,23 @@
+"use strict";
+
 let easycam;
 let objects;
-let colorShader;
-let ambient, ambient4;
+let lightShader;
+let ambient;
 
 function preload() {
-  colorShader = readShader(
-    "/Talleres/sketches/shaders/lighting/ambient_color.frag",
+  lightShader = readShader(
+    "/Talleres/sketches/shaders/lighting/specular.frag",
     {
-      varyings: Tree.NONE,
+      varyings: Tree.normal3 | Tree.position4,
     }
   );
 }
 
 function setup() {
   createCanvas(600, 600, WEBGL);
-  textureMode(NORMAL);
-  noStroke();
+  noLights();
+  colorMode(RGB, 1);
   setAttributes("antialias", true);
   let easyCamState = {
     distance: 325,
@@ -28,7 +30,6 @@ function setup() {
   document.oncontextmenu = function () {
     return false;
   };
-  colorMode(RGB, 1);
   let maxPos = 100;
   objects = [];
   for (let i = 0; i < 40; i++) {
@@ -42,38 +43,41 @@ function setup() {
       color: color(random(), random(), random()),
     });
   }
-
-  ambient = createSlider(0, 1, 0.5, 0.05);
+  ambient = createSlider(0, 1, 0.2, 0.05);
   ambient.position(20, 10);
   ambient.input(() => {
-    colorShader.setUniform("ambient", ambient.value());
+    lightShader.setUniform("ambient", ambient.value());
   });
-  shader(colorShader);
-  colorShader.setUniform("ambient", ambient.value());
-  ambient4 = createColorPicker("white");
-  ambient4.position(20, 45);
-  ambient4.style("width", "60px");
-  ambient4.input(() => {
-    let currColor = ambient4.color();
-    colorShader.setUniform("ambient4", [
-      red(currColor) / 255,
-      green(currColor) / 255,
-      blue(currColor) / 255,
-      1,
-    ]);
-  });
-  colorShader.setUniform("ambient4", [1, 1, 1, 1]);
+  shader(lightShader);
+  lightShader.setUniform("ambient", ambient.value());
 }
 
 function draw() {
   background(0);
+  let pointLight = getPointLight();
+  resetShader();
   push();
   stroke("green");
   axes();
   grid();
   pop();
+  push();
+  translate(pointLight.position);
+  noStroke();
+  fill("white");
+  sphere(3);
+  pop();
+  shader(lightShader);
+  lightShader.setUniform(
+    "uLightPosition",
+    treeLocation(pointLight.position, {
+      from: Tree.WORLD,
+      to: Tree.EYE,
+    }).array()
+  );
   for (let i = 0; i < objects.length; i++) {
     push();
+    noStroke();
     fill(objects[i].color);
     translate(objects[i].position);
     let size = objects[i].size / 2;
@@ -90,4 +94,16 @@ function draw() {
     }
     pop();
   }
+}
+
+function getPointLight() {
+  let angle = frameCount * 0.03;
+  let rad = 30;
+  let px = cos(angle) * rad;
+  let py = sin(angle) * rad;
+  let r = sin(angle) * 0.5 + 0.5;
+  return {
+    position: createVector(px, py, 0),
+    color: color(1 - r, r / 2, r),
+  };
 }

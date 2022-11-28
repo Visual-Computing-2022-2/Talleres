@@ -25,3 +25,16 @@ sketch="/Talleres/sketches/shaders/lighting/coloredAmbientLight.js" width="625" 
 ## Visualization
 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/toonShading.js" width="625" height="625">}}
+
+# Specular reflection
+## Code
+
+{{< details title="Specular reflection" >}}
+{{< highlight js >}}
+{{% include "/sketches/shaders/lighting/specularReflection.js" %}}
+{{< /highlight >}}
+{{< /details >}}
+
+## Visualization
+
+{{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/specularReflection.js" width="625" height="625">}}
