@@ -5,6 +5,9 @@ let objects;
 let mixShader;
 let ambient;
 let ambient4;
+let posicions = [];
+let sizes = [];
+let colors = [];
 function preload() {
   mixShader = readShader("/Talleres/sketches/shaders/lighting/mix.frag", {
     varyings: Tree.normal3 | Tree.position4,
@@ -15,6 +18,7 @@ function setup() {
   createCanvas(600, 600, WEBGL);
   noLights();
   colorMode(RGB, 1);
+  noStroke();
   setAttributes("antialias", true);
   let easyCamState = {
     distance: 325,
@@ -27,21 +31,6 @@ function setup() {
   document.oncontextmenu = function () {
     return false;
   };
-  let maxPos = 100;
-  objects = [];
-  for (let i = 0; i < 40; i++) {
-    objects.push({
-      position: createVector(
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos
-      ),
-      angle: random(0, TWO_PI),
-      axis: p5.Vector.random3D(),
-      size: random() * 30 + 10,
-      color: color(random(), random(), random()),
-    });
-  }
   shader(mixShader);
   ambient = createSlider(0, 1, 0.2, 0.05);
   ambient.position(20, 10);
@@ -62,6 +51,11 @@ function setup() {
   });
   mixShader.setUniform("ambient4", [1, 1, 1, 1]);
   mixShader.setUniform("ambient", ambient.value());
+  for (let i = 0; i < 40; i++) {
+    posicions.push([random(-150, 150), random(-150, 150), random(-150, 150)]);
+    sizes.push(random(10, 40));
+    colors.push(color(random(), random(), random()));
+  }
 }
 
 function draw() {
@@ -94,13 +88,11 @@ function draw() {
       to: Tree.EYE,
     }).array()
   );
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < 40; i++) {
     push();
-    noStroke();
-    fill(objects[i].color);
-    translate(objects[i].position);
-    rotate(objects[i].angle, objects[i].axis);
-    let size = objects[i].size / 2;
+    fill(colors[i]);
+    translate(posicions[i][0], posicions[i][1], posicions[i][2]);
+    let size = sizes[i];
     if (i % 5 == 0) {
       box(size * 2);
     } else if (i % 5 == 1) {

@@ -7,7 +7,19 @@ uniform vec3 lightNormal;
 varying vec3 normal3;
 
 void main() {
-  float intensity = max(0.0, dot(normalize(-lightNormal), normalize(normal3)));
-  float k = intensity > 0.95 ? 1.0 : intensity > 0.5 ? 0.6 : intensity > 0.25 ? 0.4 : 0.2;
-  gl_FragColor = k * ambient4 * uMaterialColor;
+  float diffuse = max(0.0, dot(normalize(-lightNormal), normalize(normal3)));  
+  float toon ;
+  if ( diffuse > 0.85) {
+    toon = 1.0;
+  }
+  else if ( diffuse > 0.55 ){
+    toon = 0.7;
+  }
+  else if ( diffuse > 0.25 ){
+    toon = 0.4;
+  }
+  else{
+    toon = 0.1;
+  }
+  gl_FragColor = ( toon + ambient4 )  * uMaterialColor;
 }

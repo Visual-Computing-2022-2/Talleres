@@ -4,7 +4,9 @@ let easycam;
 let objects;
 let specularShader;
 let ambient;
-
+let posicions = [];
+let sizes = [];
+let colors = [];
 function preload() {
   specularShader = readShader(
     "/Talleres/sketches/shaders/lighting/specular.frag",
@@ -17,6 +19,8 @@ function preload() {
 function setup() {
   createCanvas(600, 600, WEBGL);
   noLights();
+  noStroke();
+  textureMode(NORMAL);
   colorMode(RGB, 1);
   setAttributes("antialias", true);
   let easyCamState = {
@@ -30,19 +34,7 @@ function setup() {
   document.oncontextmenu = function () {
     return false;
   };
-  let maxPos = 100;
-  objects = [];
-  for (let i = 0; i < 40; i++) {
-    objects.push({
-      position: createVector(
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos
-      ),
-      size: random() * 30 + 10,
-      color: color(random(), random(), random()),
-    });
-  }
+
   ambient = createSlider(0, 1, 0.2, 0.05);
   ambient.position(20, 10);
   ambient.input(() => {
@@ -50,6 +42,11 @@ function setup() {
   });
   shader(specularShader);
   specularShader.setUniform("ambient", ambient.value());
+  for (let i = 0; i < 40; i++) {
+    posicions.push([random(-150, 150), random(-150, 150), random(-150, 150)]);
+    sizes.push(random(10, 40));
+    colors.push(color(random(), random(), random()));
+  }
 }
 
 function draw() {
@@ -75,12 +72,11 @@ function draw() {
       to: Tree.EYE,
     }).array()
   );
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < 40; i++) {
     push();
-    noStroke();
-    fill(objects[i].color);
-    translate(objects[i].position);
-    let size = objects[i].size / 2;
+    fill(colors[i]);
+    translate(posicions[i][0], posicions[i][1], posicions[i][2]);
+    let size = sizes[i];
     if (i % 5 == 0) {
       box(size * 2);
     } else if (i % 5 == 1) {
@@ -95,7 +91,6 @@ function draw() {
     pop();
   }
 }
-
 function getPointLight() {
   let angle = frameCount * 0.03;
   let rad = 30;
