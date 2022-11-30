@@ -77,4 +77,23 @@ sketch="/Talleres/sketches/shaders/lighting/coloredAmbientLight.js" width="625" 
 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/mixShading.js" width="625" height="625">}}
 
+<!-- # Bump mapping
+## Code
+
+{{< details title="Bump mapping" >}}
+{{< highlight glsl >}}
+{{% include "/sketches/shaders/lighting/bumpMapping.js" %}}
+{{< /highlight >}}
+{{< /details >}}
+
+{{< details title="Bump mapping Shader" >}}
+{{< highlight js >}}
+{{% include "/sketches/shaders/lighting/bump.frag" %}}
+{{< /highlight >}}
+{{< /details >}}
+
+## Visualization
+
+{{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/bumpMapping.js" width="625" height="625">}} -->
+
 ## Conclusions

@@ -12,7 +12,7 @@ varying vec4 position4;
 void main() {
   vec3 direction3 = uLightPosition - position4.xyz;
   float d = length( direction3 );
-  float attenuation = clamp( 10.0 / d, 0.0, 1.0);
+  float attenuation = clamp(10.0 / d, 0.0, 1.0);
   vec3 reflected3 = reflect(-direction3, normalize(normal3));
   vec3 camera3 = -position4.xyz;
   float specular = max(0.0, dot(normalize(reflected3), normalize(camera3))) * attenuation;
