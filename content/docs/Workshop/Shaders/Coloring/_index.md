@@ -1,8 +1,24 @@
 # Coloring
 
+The following samples had the purpose to experiment color and lighting in the shaders. This principles are going to be used later on more sofisticated lighting tequniques.
+
+## Problem statement
+
+Comprehend properly the color and lighting concepts in the shaders. And to use gragment shaders properly.
+
+## Background
+
+Observing the behavior of the color effects, we can rapidly see that the colors are rastered and remapped to the screen. This is because the colors are represented in the range [0,1] and the screen is represented in the range [0,255]. This is the reason why we need to remap the colors to the screen. We also observe every value is normalized on shaders. This is because the values are represented in the range [0,1] and the screen is represented in the range [0,255]. This is the reason why we need to remap the colors to the screen.
+
+In addition, we saw that the shader is applyed through the fragment shader. This is because the fragment shader is the one that is executed for each pixel of the screen. This is the reason why we need to remap the colors to the screen. The vertex shader needed in the process is given by the actual API, and can be seen throught the console log.
+
 ## COLOR MODE CODE
 
-{{< details title="Color mode app code" >}}
+
+Fisrstable, we test randomizing a triangle with it's vertexes, and apply a mask to it. This mask transforms each color shown in RGB, it's equivalent on CMYK.
+
+{{< details title="Color mode app code" open="false" >}}
+
 {{< highlight js >}}
 
 let colorShader;
@@ -102,6 +118,11 @@ void main() {
 Fragment Shader Taken from Course Notes.
 
 ## Color Mode Demo
+
+| Key | Action |
+| --- | --- |
+| c | Change color mode |
+| r | Randomize triangle |
 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/coloring/color_mode/color.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="525" height="525" >}}
 
@@ -245,3 +266,11 @@ Fragment Shader Taken from Course Notes.
 ## Color binding App
 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/coloring/color_binding/color.js" width="525" height="525" >}}
+
+## Results
+
+After doing each exercise, we were able to understand the shaders principles. How them are remapped, and it's application. It was a challenging exercise, but it was very interesting to see how the shaders work.
+
+## Conclusions and Future Work
+
+We were motivated by the overall exercises to continue exploring this area, and other areas of the course. For example ray-tracing, and other research areas.
