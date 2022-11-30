@@ -2,7 +2,7 @@
 
 ## COLOR MODE CODE
 
-{{< details title="Color mode app code" open="false" >}}
+{{< details title="Color mode app code" >}}
 {{< highlight js >}}
 
 let colorShader;
@@ -70,7 +70,7 @@ function keyPressed() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Color binding code" open="false" >}}
+{{< details title="Color binding code" >}}
 {{< highlight frag >}}
 // welcome to your first ever shader :)
 // in glsl it is mandatory to define a precision!
@@ -107,7 +107,7 @@ Fragment Shader Taken from Course Notes.
 
 ## Color Binding Code
 
-{{< details title="Color binding code" open="false" >}}
+{{< details title="Color binding code" >}}
 {{< highlight js >}}
 
 let same_color_shader;
@@ -209,7 +209,7 @@ function windowResized() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Color binding fragment shader" open="false" >}}
+{{< details title="Color binding fragment shader" >}}
 {{< highlight frag >}}
 
 precision mediump float;
@@ -226,7 +226,7 @@ void main() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Color binding code (shows original color)" open="false" >}}
+{{< details title="Color binding code (shows original color)" >}}
 {{< highlight frag >}}
 precision mediump float;
 
