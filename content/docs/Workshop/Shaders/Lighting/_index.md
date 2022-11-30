@@ -1,4 +1,5 @@
 # Colored Ambient Light
+
 ## Code
 
 {{< details title="Colored Ambient Light" >}}
@@ -20,6 +21,9 @@ lib2="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js"
 sketch="/Talleres/sketches/shaders/lighting/coloredAmbientLight.js" width="625" height="625">}}
 
 # Toon shading
+
+For the cartoon shading what was done was that the lighting values are calculated for each pixel and then quantized into a small number of discrete tones.
+
 ## Code
 
 {{< details title="Toon shading" >}}
@@ -39,6 +43,7 @@ sketch="/Talleres/sketches/shaders/lighting/coloredAmbientLight.js" width="625" 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/toonShading.js" width="625" height="625">}}
 
 # Specular reflection
+
 ## Code
 
 {{< details title="Specular reflection" >}}
@@ -57,8 +62,8 @@ sketch="/Talleres/sketches/shaders/lighting/coloredAmbientLight.js" width="625" 
 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/specularReflection.js" width="625" height="625">}}
 
-
 # Mixed lighting
+
 ## Code
 
 {{< details title="Mixed lighting" >}}
@@ -97,3 +102,5 @@ sketch="/Talleres/sketches/shaders/lighting/coloredAmbientLight.js" width="625" 
 {{< p5-iframe sketch="/Talleres/sketches/shaders/lighting/bumpMapping.js" width="625" height="625">}} -->
 
 ## Conclusions
+
+Lighting is a technique that gives more reality to graphic scenes. In the future it would be to implement more lighting techniques and use it in more complex scenes

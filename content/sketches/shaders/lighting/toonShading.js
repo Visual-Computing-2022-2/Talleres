@@ -4,7 +4,9 @@ let easycam;
 let objects;
 let toonShader;
 let ambient, ambient4;
-
+let posicions = [];
+let sizes = [];
+let colors = [];
 function preload() {
   toonShader = readShader("/Talleres/sketches/shaders/lighting/toon.frag", {
     varyings: Tree.normal3,
@@ -28,21 +30,6 @@ function setup() {
   document.oncontextmenu = function () {
     return false;
   };
-  let maxPos = 100;
-  objects = [];
-  for (let i = 0; i < 40; i++) {
-    objects.push({
-      position: createVector(
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos
-      ),
-      angle: random(0, TWO_PI),
-      axis: p5.Vector.random3D(),
-      size: random() * 30 + 10,
-      color: color(random(), random(), random()),
-    });
-  }
   ambient = createSlider(-1, 1, -0.4, 0.05);
   ambient.position(20, 10);
   shader(toonShader);
@@ -60,6 +47,11 @@ function setup() {
     ]);
   });
   toonShader.setUniform("ambient4", [1, 1, 1, 1]);
+  for (let i = 0; i < 40; i++) {
+    posicions.push([random(-150, 150), random(-150, 150), random(-150, 150)]);
+    sizes.push(random(10, 40));
+    colors.push(color(random(), random(), random()));
+  }
 }
 
 function draw() {
@@ -75,12 +67,11 @@ function draw() {
   axes();
   grid();
   pop();
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < 40; i++) {
     push();
-    fill(objects[i].color);
-    translate(objects[i].position);
-    rotate(objects[i].angle, objects[i].axis);
-    let size = objects[i].size / 2;
+    fill(colors[i]);
+    translate(posicions[i][0], posicions[i][1], posicions[i][2]);
+    let size = sizes[i];
     if (i % 5 == 0) {
       box(size * 2);
     } else if (i % 5 == 1) {

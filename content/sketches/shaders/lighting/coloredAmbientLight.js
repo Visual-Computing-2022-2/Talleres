@@ -2,7 +2,9 @@ let easycam;
 let objects;
 let colorShader;
 let ambient, ambient4;
-
+let posicions = [];
+let sizes = [];
+let colors = [];
 function preload() {
   colorShader = readShader(
     "/Talleres/sketches/shaders/lighting/ambient_color.frag",
@@ -29,20 +31,6 @@ function setup() {
     return false;
   };
   colorMode(RGB, 1);
-  let maxPos = 100;
-  objects = [];
-  for (let i = 0; i < 40; i++) {
-    objects.push({
-      position: createVector(
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos,
-        (random() * 2 - 1) * maxPos
-      ),
-      size: random() * 30 + 10,
-      color: color(random(), random(), random()),
-    });
-  }
-
   ambient = createSlider(0, 1, 0.5, 0.05);
   ambient.position(20, 10);
   ambient.input(() => {
@@ -63,6 +51,12 @@ function setup() {
     ]);
   });
   colorShader.setUniform("ambient4", [1, 1, 1, 1]);
+
+  for (let i = 0; i < 40; i++) {
+    posicions.push([random(-150, 150), random(-150, 150), random(-150, 150)]);
+    sizes.push(random(10, 40));
+    colors.push(color(random(), random(), random()));
+  }
 }
 
 function draw() {
@@ -72,11 +66,11 @@ function draw() {
   axes();
   grid();
   pop();
-  for (let i = 0; i < objects.length; i++) {
+  for (let i = 0; i < 40; i++) {
     push();
-    fill(objects[i].color);
-    translate(objects[i].position);
-    let size = objects[i].size / 2;
+    fill(colors[i]);
+    translate(posicions[i][0], posicions[i][1], posicions[i][2]);
+    let size = sizes[i];
     if (i % 5 == 0) {
       box(size * 2);
     } else if (i % 5 == 1) {
