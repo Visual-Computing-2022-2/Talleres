@@ -14,9 +14,11 @@ In addition, we saw that the shader is applyed through the fragment shader. This
 
 ## COLOR MODE CODE
 
+
 Fisrstable, we test randomizing a triangle with it's vertexes, and apply a mask to it. This mask transforms each color shown in RGB, it's equivalent on CMYK.
 
 {{< details title="Color mode app code" open="false" >}}
+
 {{< highlight js >}}
 
 let colorShader;
@@ -84,7 +86,7 @@ function keyPressed() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Color binding code" open="false" >}}
+{{< details title="Color binding code" >}}
 {{< highlight frag >}}
 // welcome to your first ever shader :)
 // in glsl it is mandatory to define a precision!
@@ -126,7 +128,7 @@ Fragment Shader Taken from Course Notes.
 
 ## Color Binding Code
 
-{{< details title="Color binding code" open="false" >}}
+{{< details title="Color binding code" >}}
 {{< highlight js >}}
 
 let same_color_shader;
@@ -228,7 +230,7 @@ function windowResized() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Color binding fragment shader" open="false" >}}
+{{< details title="Color binding fragment shader" >}}
 {{< highlight frag >}}
 
 precision mediump float;
@@ -245,7 +247,7 @@ void main() {
 {{< /highlight >}}
 {{< /details >}}
 
-{{< details title="Color binding code (shows original color)" open="false" >}}
+{{< details title="Color binding code (shows original color)" >}}
 {{< highlight frag >}}
 precision mediump float;
 

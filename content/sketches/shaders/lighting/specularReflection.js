@@ -2,11 +2,11 @@
 
 let easycam;
 let objects;
-let lightShader;
+let specularShader;
 let ambient;
 
 function preload() {
-  lightShader = readShader(
+  specularShader = readShader(
     "/Talleres/sketches/shaders/lighting/specular.frag",
     {
       varyings: Tree.normal3 | Tree.position4,
@@ -46,10 +46,10 @@ function setup() {
   ambient = createSlider(0, 1, 0.2, 0.05);
   ambient.position(20, 10);
   ambient.input(() => {
-    lightShader.setUniform("ambient", ambient.value());
+    specularShader.setUniform("ambient", ambient.value());
   });
-  shader(lightShader);
-  lightShader.setUniform("ambient", ambient.value());
+  shader(specularShader);
+  specularShader.setUniform("ambient", ambient.value());
 }
 
 function draw() {
@@ -67,8 +67,8 @@ function draw() {
   fill("white");
   sphere(3);
   pop();
-  shader(lightShader);
-  lightShader.setUniform(
+  shader(specularShader);
+  specularShader.setUniform(
     "uLightPosition",
     treeLocation(pointLight.position, {
       from: Tree.WORLD,
